@@ -754,6 +754,9 @@ public class StringModifierCommand {
 
     <section data-markdown>
         #### Excercise 2 - OSGi console
+        
+        * **Lifecycle Methods**
+        * Explore OSGi console
     </section>
 
     <section>
@@ -775,8 +778,15 @@ void deactivate() {
         </code></pre>
     </section>
 
+    <section data-markdown>
+        #### Excercise 2 - OSGi console
+        
+        * Lifecycle Methods
+        * **Explore OSGi console**
+    </section>
+
     <section>
-        <h4>Excercise 2 - OSGi console</h4>
+        <h4>Excercise 2 - Explore OSGi console</h4>
         <ul>
             <li>Execute in OSGi shell and inspect the behaviour
             <small><table>
@@ -832,10 +842,10 @@ void deactivate() {
     </section>
 </section>
 
-<section id="exec3-configuration">
+<section id="exec3-pde-configuration">
 
     <section data-markdown>
-        #### Excercise 3 - Configuration
+        #### Excercise 3 - PDE - Configuration
         
         * **Configurable Service**
         * Configuration Command
@@ -948,7 +958,7 @@ public class StringManipulator implements StringModifier {
     </section>
 
     <section data-markdown>
-        #### Excercise 3 - Configuration
+        #### Excercise 3 - PDE - Configuration
         
         * Configurable Service
         * **Configuration Command**
@@ -962,7 +972,7 @@ public class StringManipulator implements StringModifier {
         * open MANIFEST.MF in examples.pde.impl.configurable
         * switch to the Dependencies tab
         * add org.osgi.service.cm to the Imported Packages </br>(don‘t forget the upper bounds!)
-        * create a Gogo Shell command in examples.pde.impl.configurable package
+        * create a Gogo Shell command named ```ConfigCommand``` in ```examples.pde.impl.configurable package```
         * reference the ConfigurationAdmin service
         * specify the osgi.command.function=config and implement the corresponding method
     </section>
@@ -986,11 +996,11 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 @Component(
-		property = { 
-				"osgi.command.scope:String=zExamplesModifier",
-				"osgi.command.function:String=config" 
-		}, 
-		service = ConfigCommand.class)
+	property = { 
+		"osgi.command.scope:String=zExamplesModifier",
+		"osgi.command.function:String=config" 
+	}, 
+	service = ConfigCommand.class)
 public class ConfigCommand {
 
 	ConfigurationAdmin cm;
@@ -1052,7 +1062,7 @@ public class ConfigCommand {
     </section>
 
     <section data-markdown>
-        #### Excercise 3 - Configuration
+        #### Excercise 3 - PDE - Configuration
         
         * Configurable Service
         * Configuration Command
@@ -1062,7 +1072,7 @@ public class ConfigCommand {
     </section>
 
     <section data-markdown>
-        #### PDE- Update StringModifierCommand
+        #### PDE - Update StringModifierCommand
     
         * change the implementation of ```StringModifierCommand``` to reference multiple ```StringModifier```
         * it needs ```AT_LEAST_ONE``` to be satisfied
@@ -1088,9 +1098,9 @@ import examples.service.api.StringModifier;
 				"osgi.command.scope:String=zExampleModifier",
 				"osgi.command.function:String=modify" 
 		}, 
-		service = StringManipulatorCommand.class
+		service = StringModifierCommand.class
 )
-public class StringManipulatorCommand {
+public class StringModifierCommand {
 
 	private List&lt;StringModifier&gt; modifier = new ArrayList&lt;&gt;();
 
@@ -1105,8 +1115,7 @@ public class StringManipulatorCommand {
 	}
 	
 	@Reference(
-			cardinality=ReferenceCardinality.AT_LEAST_ONE,
-			policy=ReferencePolicy.DYNAMIC
+		cardinality=ReferenceCardinality.AT_LEAST_ONE
 	)
 	void bindStringModifier(StringModifier modifier) {
 		this.modifier.add(modifier);
@@ -1130,7 +1139,7 @@ public class StringManipulatorCommand {
     </section>
 
     <section data-markdown>
-        #### Excercise 3 - Configuration
+        #### Excercise 3 - PDE - Configuration
         
         * Configurable Service
         * Configuration Command
@@ -1142,7 +1151,8 @@ public class StringManipulatorCommand {
     <section>
         <h4>PDE - Launch in IDE</h4>
         <ul>
-            <li>copy an existing Run Configuration and add the following bundles:
+            <li>copy an existing Run Configuration and name it <code>configurable_runtime</code></li>
+            <li>add the following bundles:
             <small><table>
                 <thead>
                     <tr>
@@ -1174,7 +1184,7 @@ public class StringManipulatorCommand {
     </section>
 
     <section data-markdown>
-        #### Excercise 3 - Configuration
+        #### Excercise 3 - PDE - Configuration
         
         * Configurable Service
         * Configuration Command
@@ -1213,16 +1223,293 @@ void bindStringModifier(StringModifier modifier) {
     </section>
 </section>
 
-<section id="exec4-webconsole">
+<section id="exec4-bndtools-webconsole">
 
     <section data-markdown>
-        #### Excercise 4 - Webconsole
+        #### Excercise 4 - bndtools -  Webconsole
+        
+        * **Configurable Service**
+        * Update StringModifierCommand
+        * Launch IDE
+    </section>
+
+    <section>
+        <h4>bndtools - create project for configurable component</h4>
+        <ul>
+            <li><code>File -> New -> Bnd OSGi Project</code></li>
+            <li><code>Select API Project 3.3.0</code></li>
+            <li>Project Name: <code>examples.bndtools.impl.configurable</code></li>
+            <img src="images/bnd/60-create-configurable-project_1.png" height="280px" />
+            <img src="images/bnd/61-create-configurable-project_2.png" height="280px" />
+            <img src="images/bnd/62-create-configurable-project_3.png" height="280px" />
+        </ul>
+    </section>
+
+    <section>
+        <h4>bndtools - define dependencies / build path</h4>
+        <ul>
+            <li>Inside Bnd Editor on the Build Tab</li> 
+            <li>add to the Build Path <code>examples.bndtools.service.api</code></li>
+        </ul>
+        <img src="images/bnd/63-define-dependencies.png" height="360px" />
+        <img src="images/bnd/64-define-dependencies_2.png" height="360px" />
+    </section>
+
+    <section data-markdown>
+        #### bndtools - Implementation Configurable Component
+        
+        * create package ```examples.bndtools.impl.configurable```
+        * create inside a class ```StringManipulator implements StringModifier```
+        * set property configuration PID to manipulator
+        * set the configuration policy to REQUIRE
+        * store the Component Properties in a member variable via @Activate and @Modified
+        * implement ```modify(String)``` to create a modified version of the input String taking the configuration into account
+    </section>
+
+    <section>
+    <h4>bndtools - Implementation Configurable comp.</h4>
+        <ul>
+            <li>delete the Example.java files in the package</li>
+            <li>copy the following snippet and paste it into src folder</li>
+        </ul>
+        <pre><code class="hljs" data-trim contenteditable>
+package examples.bndtools.impl.configurable;
+
+import org.osgi.service.component.annotations.*;
+import org.osgi.service.metatype.annotations.Designate;
+import org.osgi.service.metatype.annotations.ObjectClassDefinition;
+import examples.service.api.StringModifier;
+
+@ObjectClassDefinition(name = "StringManipulator Configuration")
+@interface StringManipulatorConfig {
+	String prefix() default "";
+	String suffix() default "";
+	int repeat() default 1;
+	boolean uppercase() default false;
+}
+
+@Component(
+	configurationPid = "manipulator", 
+	configurationPolicy = ConfigurationPolicy.REQUIRE
+)
+@Designate(ocd = StringManipulatorConfig.class)
+public class StringManipulator implements StringModifier {
+
+	StringManipulatorConfig config;
+
+	@Activate
+	void activate(StringManipulatorConfig config) {
+		System.out.println(this.getClass() + " activated");
+		this.config = config;
+	}
+
+	@Modified
+	void modified(StringManipulatorConfig config) {
+		this.config = config;
+	}
+
+	public void deactivate() {
+		System.out.println(this.getClass() + " de-activated");
+	}
+
+	@Override
+	public String modify(String input) {
+		String prefix = config.prefix();
+		String suffix = config.suffix();
+		Integer iteration = config.repeat();
+		Boolean upperCase = config.uppercase();
+
+		StringBuilder builder = new StringBuilder();
+		builder.append(prefix);
+
+		for (int i = 0; i &lt; iteration; i++) {
+			builder.append(upperCase ? input.toUpperCase() : input);
+		}
+
+		builder.append(suffix);
+
+		return builder.toString();
+	}
+}
+        </code></pre>
+    </section>
+
+    <section data-markdown>
+        #### Excercise 4 - bndtools -  Webconsole
+        
+        * Configurable Service
+        * **Update StringModifierCommand**
+        * Launch IDE
+    </section>
+
+    <section data-markdown>
+        #### bndtools - Update StringModifierCommand
+    
+        * change the implementation of ```StringModifierCommand``` to reference multiple ```StringModifier```
+        * it needs ```AT_LEAST_ONE``` to be satisfied
+        * add an updated event method to get notified on configuration changes
+        * this method will only get called after the ```StringModifierCommand``` is activated (```modify``` needs to be called once)
+    </section>
+
+    <section>
+        <h4>bndtools - Update StringModifierCommand</h4>
+        <p>
+            if you did not implemented it yourself, </br>
+            copy the following snippet and paste it into src folder
+        </p>
+        <pre><code class="hljs" data-trim contenteditable>
+package examples.bndtools.command;
+
+import java.util.*;
+import org.osgi.service.component.annotations.*;
+import examples.service.api.StringModifier;
+
+@Component(
+		property = { 
+				"osgi.command.scope:String=zExampleModifier",
+				"osgi.command.function:String=modify" 
+		}, 
+		service = StringModifierCommand.class
+)
+public class StringModifierCommand {
+
+	private List&lt;StringModifier&gt; modifier = new ArrayList&lt;&gt;();
+
+	@Activate
+	void activate() {
+		System.out.println(this.getClass() + " activated");
+	}
+
+	@Deactivate
+	void deactivate() {
+		System.out.println(this.getClass() + " deactivated");
+	}
+	
+	@Reference(
+		cardinality=ReferenceCardinality.AT_LEAST_ONE
+	)
+	void bindStringModifier(StringModifier modifier) {
+		this.modifier.add(modifier);
+	}
+	
+	void unbindStringModifier(StringModifier modifier) {
+		this.modifier.remove(modifier);
+	}
+	
+	void updatedStringModifier(StringModifier modifier, Map&lt;String, Object&gt; properties) {
+		System.out.println(modifier.getClass() + " configuration updated");
+		properties.forEach((key, value) -&gt; System.out.println(key + " = " + value));
+	}
+
+	public void modify(String input) {
+		modifier.forEach(m -&gt; System.out.println(m.modify(input)));
+	}
+}
+        </code></pre>
+    </section>
+
+    <section data-markdown>
+        #### Excercise 4 - bndtools -  Webconsole
+        
+        * Configurable Service
+        * Update StringModifierCommand
+        * **Launch IDE**
+    </section>
+
+    <section>
+        <h4>bndtools - Launch from IDE - prepare 1/3</h4>
+        <ul>
+            <li>Open the file <code>launch.bndrun</code> from project <code>examples.bndtools.impl.configurable</code></li>
+            <li>Select OSGi Framework <code>org.apache.felix.framework;version='[5.4.0,5.4.0]'</code></li>
+            <li>Select Execution Environment: <code>JavaSE-1.8</code></li>
+            <li>In the Run Requirements add the following bundles
+            <small><table>
+                <thead>
+                    <tr>
+                        <th>bundle</th>
+                        <th>purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>examples.bndtools.service.commdn</td>
+                        <td>application service consumer</td>
+                    </tr>
+                    <tr>
+                        <td>examples.bndtools.impl.inverter</td>
+                        <td>application service implementation</td>
+                    </tr>
+                    <tr>
+                        <td>examples.bndtools.impl.configurable</td>
+                        <td>application service configurable implementation</td>
+                    </tr>
+                    <tr>
+                        <td>examples.bndtools.service.api</td>
+                        <td>application service api</td>
+                    </tr>
+            </table></small>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h4>bndtools - Launch from IDE - prepare 2/3</h4>
+        <ul>
+            <li>In the Run Requirements add the following bundles
+            <small><table>
+                <thead>
+                    <tr>
+                        <th>bundle</th>
+                        <th>purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tr>
+                        <td>org.apache.felix.gogo.shell</td>
+                        <td>Gogo OSGi shell</td>
+                    </tr>
+                    <tr>
+                        <td>org.apache.felix.gogo.command</td>
+                        <td>Gogo OSGi commands</td>
+                    </tr>
+                   <tr>
+                        <td>org.apache.felix.webconsole</td>
+                        <td>Webconsole</td>
+                    </tr>
+                   <tr>
+                        <td>org.apache.felix.webconsole.plugins.ds</td>
+                        <td>Webconsole Plugin</td>
+                    </tr>
+                </tbody>
+            </table></small>
+            </li>
+        </ul>
+    </section>
+    
+    <section data-markdown>
+        #### bndtools - Launch from IDE 3/3
+        
+        * resolve
+        * press button <code>Run OSGi</code>
+        * open a Webbrowser on URL: http://localhost:8080/system/console
+        * enter Webconsole credentials (user and password: admin)
+        * navigate to <code>OSGi -> Configuration</code>
+        * provide a <code>StringManipulator Configuration</code>
+        * enter in the console <code>modify example</code>
+    </section>
+
+</section>
+
+<section id="exec4-pde-webconsole">
+    <section data-markdown>
+        #### Excercise 4 - PDE -  Webconsole
     </section>
 
     <section>
         <h4>PDE - Launch from IDE with Webconsole</h4>
         <ul>
-            <li>copy an existing Run Configuration and add the following
+            <li>copy an existing Run Configuration and name it <code>webconsole</code></li>
+            <li>add the following bundles:
             <small><table>
                 <thead>
                     <tr>
@@ -1322,7 +1609,7 @@ void bindStringModifier(StringModifier modifier) {
 <section id="exec5-rsa">
 
     <section data-markdown>
-        #### Excercise 5 - Remote Service Admin
+        #### Excercise 5 - PDE - Remote Service Admin
     </section>
 
     <section>
@@ -1342,7 +1629,8 @@ public class StringManipulator implements StringModifier {
     <section>
         <h4>Launch from IDE with RSA 1/2</h4>
         <ul>
-            <li>copy an existing Run Configuration and add the following
+            <li>copy an existing Run Configuration and name it <code>rsa</code></li>
+            <li>add the following bundles:
             <small><table>
                 <thead>
                     <tr>
