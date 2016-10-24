@@ -5,6 +5,6 @@
    <service>
       <provide interface="examples.pde.command.StringModifierCommand"/>
    </service>
-   <reference bind="bindStringModifier" cardinality="1..1" interface="examples.service.api.StringModifier" name="StringModifier" policy="static" unbind="unbindStringModifier" updated="updatedStringModifier"/>
+   <reference bind="bindStringModifier" cardinality="1..1" interface="StringModifier" name="StringModifier" policy="static" unbind="unbindStringModifier" updated="updatedStringModifier"/>
    <implementation class="examples.pde.command.StringModifierCommand"/>
 </scr:component>
