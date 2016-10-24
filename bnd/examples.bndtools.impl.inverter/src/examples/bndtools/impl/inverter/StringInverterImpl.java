@@ -9,4 +9,14 @@ public class StringInverterImpl implements StringModifier {
 	public String modify(String input) {
 		return new StringBuilder(input).reverse().toString();
 	}
+
+	@Activate
+	void activate() {
+		System.out.println(this.getClass() + " activated");
+	}
+
+	@Deactivate
+	void deactivate() {
+		System.out.println(this.getClass() + " deactivated");
+	}
 }

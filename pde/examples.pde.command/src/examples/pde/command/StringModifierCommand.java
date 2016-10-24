@@ -31,4 +31,14 @@ public class StringModifierCommand {
 	public void modify(String message) {
 	    System.out.println(modifier.modify(message));
 	}
+
+	@Activate
+	void activate() {
+	    System.out.println(this.getClass() + " activated");
+	}
+
+	@Deactivate
+	void deactivate() {
+	    System.out.println(this.getClass() + " deactivated");
+	}
 }
