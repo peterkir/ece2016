@@ -7,7 +7,7 @@ https://www.eclipsecon.org/europe2016/session/building-nano-services-osgi-declar
 
 ## Tooling
 - Java 8
-- Eclipse EPP committer package Neon.R1
+- Eclipse EPP committer package Oxygen M2
 - bndtools 3.3
 - Github Repository
 - Gitter Chat
