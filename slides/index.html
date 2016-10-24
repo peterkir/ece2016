@@ -87,6 +87,7 @@
         <p>copy the following snippet and paste it into src folder</p>
         <pre><code class="hljs" data-trim contenteditable>
 package examples.service.api;
+
 public interface StringModifier {
 	String modify(String input);
 }
@@ -110,9 +111,7 @@ public interface StringModifier {
         </p>
         <img src="images/pde/07_ServiceAPI-manifest.png" height="360px" />
     </section>
-</section>
-    
-<section id="exec1-pde-impl">
+
     <section data-markdown>
         #### Excercise 1 - PDE - Simple Service
         
@@ -156,8 +155,6 @@ public interface StringModifier {
         <h4>PDE - create implementation</h4>
         <ul>
             <li>copy the following snippet and paste it into src folder</li>
-            <li>after the paste organize the imports </br>
-            <code>Source -> Organize imports</code></li>
         </ul>
         <pre><code class="hljs" data-trim contenteditable>
 package examples.pde.impl.inverter;
@@ -184,9 +181,6 @@ public class StringInverterImpl implements StringModifier {
         <img src="images/pde/14_impl-bundle_2.png" height="320px" />
     </section>
 
-</section>
-
-<section id="exec1-pde-consumer">
     <section data-markdown>
         #### Excercise 1 - PDE - Simple Service
         
@@ -259,28 +253,25 @@ public class StringModifierCommand {
         <h4>PDE - @Reference - Event Strategy</h4>
         <p>update the StringModifierCommand</p>
         <pre><code class="hljs" data-trim contenteditable>
-            @Reference
-            void bindStringModifier(StringModifier modifier) {
-                this.modifier = modifier;
-            }
-            
-            void updatedStringModifier(StringModifier modifier, Map&lt;String, ?&gt; properties) {
-                properties.forEach((k,v) -> {System.out.println(k + " : " + v);} );
-            }
-            
-            void unbindStringModifier(StringModifier modifier) {
-                this.modifier = null;
-            }
-            
-            public void modify(String message) {
-                System.out.println(modifier.modify(message));
-            }        
+@Reference
+void bindStringModifier(StringModifier modifier) {
+    this.modifier = modifier;
+}
+
+void updatedStringModifier(StringModifier modifier, Map&lt;String, ?&gt; properties) {
+    properties.forEach((k,v) -> {System.out.println(k + " : " + v);} );
+}
+
+void unbindStringModifier(StringModifier modifier) {
+    this.modifier = null;
+}
+
+public void modify(String message) {
+    System.out.println(modifier.modify(message));
+}        
         </code></pre>
     </section>
     
-</section>
-
-<section id="exec1-pde-launch">
     <section data-markdown>
         #### Excercise 1 - PDE - Simple Service
         
@@ -388,9 +379,7 @@ public class StringModifierCommand {
             <img src="images/pde/31_simple-runtime-console.png" height="200px" />
         </ul>
     </section>
-</section>
 
-<section id="exec1-pde-export">
     <section data-markdown>
         #### Excercise 1 - PDE - Simple Service
         
@@ -405,7 +394,7 @@ public class StringModifierCommand {
         ####PDE - Prepare Equinox standalone runtime
 
         * extract the provided resources ```equinox_oxygen_runtime.zip``` into e.g. *C:\ece2016\equinox_oxygen_runtime*
-        * No platform specifix launcher!
+        * No platform specific launcher!
         * Customized configurator to support auto starting all installed bundles - [Source on GitHub](https://github.com/fipro78/equinox-autoconfigurator)
         * Adapted ```configuration/config.ini```
             * auto-start the auto configurator
@@ -416,7 +405,9 @@ public class StringModifierCommand {
     <section>
         <h4>PDE - Export application bundles</h4>
         <ul>
-            <li>export bundles via <code>File -> Export ... -> Plug-in Development -> Deployable plug-ins and fragments</code></li>
+            <li>export bundles via menu
+                <small><code>File -> Export ... -> Plug-in Development -> Deployable plug-ins and fragments</code></small></li>
+            <li>select all <code>examples.pde.*</code></li>
             <li>provide directory <code>C:\ece2016\equinox_oxygen_runtime</code></li>
         </ul>
         <img src="images/pde/40_export-plugins.png" height="320px" />
@@ -458,7 +449,7 @@ public class StringModifierCommand {
     <section>
         <h4>bndtools - create workspace</h4>
         <p>
-            select from menu:<br>
+            select from menu:</br>
             <code>File -> New -> Bnd OSGi Workspace</code><br>
             <code>GitHub -> bndtools/workspace</code>
         </p>
@@ -479,8 +470,9 @@ public class StringModifierCommand {
         <h4>bndtools - create API project and interface package</h4>
         <ul>
             <li><code>File -> New -> Bnd OSGi Project</code></li>
+            <li><code>Select API Project 3.3.0</code></li>
             <li>Project Name: <code>examples.bndtools.service.api</code></li>
-            <li>Java Package: <code>examples.bndtools.service.api</code></li>
+            <li>Java Package: <code>examples.service.api</code></li>
             <img src="images/bnd/06-create-api-project_1.png" height="280px" />
             <img src="images/bnd/07-create-api-project_2.png" height="280px" />
             <img src="images/bnd/08-create-api-project_3.png" height="280px" />
@@ -495,6 +487,7 @@ public class StringModifierCommand {
         </ul>
         <pre><code class="hljs" data-trim contenteditable>
 package examples.service.api;
+
 public interface StringModifier {
 	String modify(String input);
 }
@@ -520,9 +513,7 @@ public interface StringModifier {
         </ul>
         <img src="images/bnd/10_generated-bundle.png" height="420px" />
     </section>
-</section>
 
-<section id="exec1-bnd-impl">
     <section data-markdown>
         #### Excercise 1 - bndtools - Simple Service
         
@@ -537,20 +528,20 @@ public interface StringModifier {
         <h4>bndtools - create implementation project</h4>
         <ul>
             <li><code>File -> New -> Bnd OSGi Project</code></li>
+            <li><code>Select Component Development 3.3.0</code></li>
             <li>Project and Java Package Name: <br>
                 <code>examples.bndtools.impl.inverter</code></li>
-            <img src="images/bnd/20-create-impl-project_1.png" height="280px" />
-            <img src="images/bnd/21-create-impl-project_2.png" height="280px" />
-            <img src="images/bnd/22-create-impl-project_3.png" height="280px" />
+            <img src="images/bnd/20-create-impl-project_1.png" height="290px" />
+            <img src="images/bnd/21-create-impl-project_2.png" height="290px" />
+            <img src="images/bnd/22-create-impl-project_3.png" height="290px" />
         </ul>
     </section>
 
     <section>
         <h4>bndtools - define dependencies / build path</h4>
         <ul>
-            <li>Inside Bnd Editor on the Build Tab<br/> 
-            <code>examples.bndtools.service.api</code>
-            </li>
+            <li>Inside Bnd Editor on the Build Tab</li> 
+            <li>add to the Build Path <code>examples.bndtools.service.api</code></li>
         </ul>
         <img src="images/bnd/23-define-dependencies.png" height="360px" />
         <img src="images/bnd/24-define-dependencies_2.png" height="360px" />
@@ -574,14 +565,6 @@ public class StringInverterImpl implements StringModifier {
 	public String modify(String input) {
 		return new StringBuilder(input).reverse().toString();
 	}
-	@Activate
-	void activate() {
-		System.out.println(this.getClass() + " activated");
-	}
-	@Deactivate
-	void deactivate() {
-		System.out.println(this.getClass() + " deactivated");
-	}
 }
         </code></pre>
     </section>
@@ -594,9 +577,7 @@ public class StringInverterImpl implements StringModifier {
         <img src="images/bnd/25_impl-bundle-bnd.png" height="320px" />
         <img src="images/bnd/26_impl-bundle-generated.png" height="320px" />
     </section>
-</section>
 
-<section id="exec1-bnd-consumer">
     <section data-markdown>
         #### Excercise 1 - bndtools - Simple Service
         
@@ -611,7 +592,8 @@ public class StringInverterImpl implements StringModifier {
         <h4>bndtools - create consumer project</h4>
         <ul>
             <li><code>File -> New -> Bnd OSGi Project</code></li>
-            <li>Project and Java Package Name: <br>
+             <li><code>Select Component Development 3.3.0</code></li>
+           <li>Project and Java Package Name: <br>
                 <code>examples.bndtools.command</code></li>
             <img src="images/bnd/30-create-consumer-project_1.png" height="280px" />
             <img src="images/bnd/31-create-consumer-project_2.png" height="280px" />
@@ -622,9 +604,8 @@ public class StringInverterImpl implements StringModifier {
     <section>
         <h4>bndtools - define dependencies / build path</h4>
         <ul>
-            <li>Inside Bnd Editor on the Build Tab</br>
-            <code>examples.bndtools.service.api</code>
-            </li>
+            <li>Inside Bnd Editor on the Build Tab</li> 
+            <li>add to the Build Path <code>examples.bndtools.service.api</code></li>
         </ul>
         <img src="images/bnd/33-define-dependencies.png" height="360px" />
         <img src="images/bnd/34-define-dependencies_2.png" height="360px" />
@@ -666,9 +647,7 @@ public class StringModifierCommand {
         <img src="images/bnd/35_consumer-bundle-src.png" height="320px" />
         <img src="images/bnd/36_consumer-bundle-bnd.png" height="320px" />
     </section>
-</section>
 
-<section id="exec1-bnd-launch-ide">
     <section data-markdown>
         #### Excercise 1 - bndtools - Simple Service
         
@@ -682,7 +661,7 @@ public class StringModifierCommand {
     <section>
         <h4>bndtools - Launch from IDE - prepare</h4>
         <ul>
-            <li>Open the file <code>launch.bndrun</code> from project<code>examples.bndtools.impl.inverter</code></li>
+            <li>Open the file <code>launch.bndrun</code> from project <code>examples.bndtools.commands</code></li>
             <li>Select OSGi Framework <code>org.apache.felix.framework;version='[5.4.0,5.4.0]'</code></li>
             <li>Select Execution Environment: <code>JavaSE-1.8</code></li>
             <li>In the Run Requirements add the following bundles
@@ -738,9 +717,7 @@ public class StringModifierCommand {
             <img src="images/bnd/43_bnd-editor-launch.png" height="440px" />
         </ul>
     </section>
-</section>
 
-<section id="exec1-bnd-export">
     <section data-markdown>
         #### Excercise 1 - bndtools - Simple Service
         
@@ -756,7 +733,7 @@ public class StringModifierCommand {
         <ul>
             <li>start export via button <code>Export</code> on the top-right</li>
             <li>select executable jar</li>
-            <li>Export to JAR: <code>C:\tmp\inverter.jar</code></li>
+            <li>Export to JAR: <code>C:\ece2016\inverter.jar</code></li>
             <img src="images/bnd/50_export-wizard-executable-jar.png" height="300px" />
             <img src="images/bnd/51_export-wizard-executable-jar_2.png" height="300px" />
         </ul>
@@ -765,7 +742,7 @@ public class StringModifierCommand {
     <section>
         <h4>bndtools - run stand-alone "MegaJar"</h4>
         <ul>
-            <li>open a cmd/shell window inside <code>C:\tmp</code></li>
+            <li>open a cmd/shell window inside <code>C:\ece2016</code></li>
             <li>launch <code>java -jar inverter.jar</code></li>
             <li>type in the console <code>modify example</code></li>
         </ul>
@@ -828,7 +805,7 @@ void deactivate() {
                     </tr>
                     <tr>
                         <td>Disable StringInverterImpl and check the console output</td>
-                        <td><code>dis</code></td>
+                        <td><code>dis &lt;compID&gt;</code></td>
                         <td><code>scr:disable examples.bndtools.<br>
                         impl.inverter.StringInverterImpl</code></td>
                     </tr>
@@ -839,7 +816,7 @@ void deactivate() {
                     </tr>
                     <tr>
                         <td>Enable StringInverterImpl and check the console output</td>
-                        <td><code>en &lt;component id&gt;</code></td>
+                        <td><code>en &lt;compID&gt;</code></td>
                         <td><code>scr:enable examples.bndtools.<br>
                         impl.inverter.StringInverterImpl</code></td>
                     </tr>
@@ -1192,7 +1169,7 @@ public class StringManipulatorCommand {
             <li>run</li>
             <li>execute in console: <code>config uppercase true</code></li>
             <li>execute in console: <code>modify test</code></li>
-            <li>verify the result: <code>modify test</code></li>
+            <li>verify the result</li>
         </ul>
     </section>
 
