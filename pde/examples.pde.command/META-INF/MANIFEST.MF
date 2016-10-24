@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Examples Commands
+Bundle-SymbolicName: examples.pde.command
+Bundle-Version: 1.0.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Import-Package: examples.service.api;version="[1.0.0,2.0.0)",
+ org.osgi.service.component.annotations;version="1.2.0";resolution:=optional
+Service-Component: OSGI-INF/examples.pde.command.StringModifierCommand.xml
+Bundle-ActivationPolicy: lazy
