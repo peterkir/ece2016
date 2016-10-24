@@ -1,0 +1,1523 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+        <title>Building Nano Services with OSGi Declarative Services</title>
+
+		<meta name="description" content="EclipseCon Europe 2016 - Tutorial - Building Nano Services with OSGi Declarative Services">
+        <meta name="author" content="Dirk Fauth,Peter Kirschner">
+    
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+        <link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css" id="theme">
+    
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+    
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+            <div class="slides">
+<section id="title">
+    <h3>Building Nano Services <br>with OSGi Declarative Services</h3>
+    <p>
+        <small>created by</small><br>
+        Dirk Fauth and Peter Kirschner
+    </p>
+    <p><small>
+        EclipseCon Europe 2016<br>
+        Schubartsaal<br>
+        October 25, 2016 - 09:00 to 12:00<br>
+    </small></p>
+</section>
+
+<section id="exec1-pde-api">
+
+    <section data-markdown>
+        #### Excercise 1 - PDE - Simple Service
+        
+        * **Service API**
+        * Service Implementation
+        * Service Consumer
+        * Launch from IDE
+        * Export and launch standalone
+    </section>
+
+    <section data-markdown>
+        #### PDE - open PDE perspective
+        * switch to the Plug-in Development perspective
+        * open perspective button in upper right corner  
+        * select the "Plug-in Development" perspective
+    
+        ![pic1](images/eclipse-perspective-button.png)
+        ![pic2](images/pde/01_pde-perspective-selection.png)
+    </section>
+    
+    <section>
+        <h4>PDE - create project for Service API</h4>
+        <ul>
+            <li>select from menu: <code>File -> New -> Plug-in Project</code></li>
+            <li>provide as Project name: <code>examples.pde.service.api</code></li>
+            <img src="images/pde/02_new-plugin-project-1.png" height="440px" />
+            <img src="images/pde/03_new-plugin-project-2.png" height="440px" />
+        </ul>
+    </section>
+
+    <section>
+        <h4>PDE - create API interface package</h4>
+        <p>copy the following snippet and paste it into src folder</p>
+        <pre><code class="hljs" data-trim contenteditable>
+package examples.service.api;
+public interface StringModifier {
+	String modify(String input);
+}
+        </code></pre>
+        <img src="images/pde/04_create-api.png" height="360px" />
+    </section>
+
+    <section>
+        <h4>PDE - export the API package</h4>
+        <p>
+            Inside the Manifest Editor on the Runtime Tab<br/> export the package with version 1.0.0
+        </p>
+        <img src="images/pde/05_exported-packages_1.png" height="280px" />
+        <img src="images/pde/06_exported-packages_2.png" height="360px" />
+    </section>
+
+    <section>
+        <h4>PDE - Service API Bundle Manifest</h4>
+        <p>
+            You successfully created the Service API Bundle if your MANIFEST.MF look like this.
+        </p>
+        <img src="images/pde/07_ServiceAPI-manifest.png" height="360px" />
+    </section>
+</section>
+    
+<section id="exec1-pde-impl">
+    <section data-markdown>
+        #### Excercise 1 - PDE - Simple Service
+        
+        * Service API
+        * **Service Implementation**
+        * Service Consumer
+        * Launch from IDE
+        * Export and launch standalone
+    </section>
+
+    <section>
+        <h4>PDE - create project for Service Implementation</h4>
+        <ul>
+            <li>select from menu: <code>File -> New -> Plug-in Project</code></li>
+            <li>Project name: <code>examples.pde.impl.inverter</code></li>
+            <img src="images/pde/10-create-impl-project_1.png" height="440px" />
+            <img src="images/pde/11-create-impl-project_2.png" height="440px" />
+        </ul>
+    </section>
+
+    <section>
+        <h4>PDE - define dependencies / build path</h4>
+        <ul>
+            <li>Import package: <code>examples.service.api</code></li>
+            <li>Specify the upper bound version: <code>2.0.0</code></li>
+            <li>Import package: <code>org.osgi.service.component.annotations</code></li>
+            <li>Specify resolution: <code>optional</code></li>
+            <img src="images/pde/12-import-packages_2.png" height="280px" />
+            <img src="images/pde/12-import-packages_3.png" height="280px" />
+        </ul>
+    </section>
+
+    <section>
+        <h4>PDE - define dependencies / build path</h4>
+        <ul>
+            <img src="images/pde/12-import-packages.png" height="580px"/>
+        </ul>
+    </section>
+
+    <section>
+        <h4>PDE - create implementation</h4>
+        <ul>
+            <li>copy the following snippet and paste it into src folder</li>
+            <li>after the paste organize the imports </br>
+            <code>Source -> Organize imports</code></li>
+        </ul>
+        <pre><code class="hljs" data-trim contenteditable>
+package examples.pde.impl.inverter;
+
+import org.osgi.service.component.annotations.Component;
+import examples.service.api.StringModifier;
+
+@Component
+public class StringInverterImpl implements StringModifier {
+	@Override
+	public String modify(String input) {
+		return new StringBuilder(input).reverse().toString();
+	}
+}
+        </code></pre>
+    </section>
+
+    <section>
+        <h4>PDE - Implementation Bundle</h4>
+        <p>
+            You successfully created the Impl Bundle if look like this.
+        </p>
+        <img src="images/pde/13_impl-bundle_1.png" height="320px" />
+        <img src="images/pde/14_impl-bundle_2.png" height="320px" />
+    </section>
+
+</section>
+
+<section id="exec1-pde-consumer">
+    <section data-markdown>
+        #### Excercise 1 - PDE - Simple Service
+        
+        * Service API
+        * Service Implementation
+        * **Service Consumer**
+        * Launch from IDE
+        * Export and launch standalone
+    </section>
+
+    <section>
+        <h4>PDE - create project for the consumer</h4>
+        <ul>
+            <li>select from menu: <code>File -> New -> Plug-in Project</code></li>
+            <li>Project name: <code>examples.pde.command</code></li>
+            <img src="images/pde/20_create-consumer-project_1.png" height="440px" />
+            <img src="images/pde/21_create-consumer-project_2.png" height="440px" />
+        </ul>
+    </section>
+
+    <section>
+        <h4>PDE - define dependencies / build path</h4>
+        <ul>
+            <li>Import package: <code>examples.service.api</code></li>
+            <li>Specify the upper bound version: <code>2.0.0</code></li>
+            <li>Import package: <code>org.osgi.service.component.annotations</code></li>
+            <li>Specify resolution: <code>optional</code></li>
+            <img src="images/pde/12-import-packages_2.png" height="280px" />
+            <img src="images/pde/12-import-packages_3.png" height="280px" />
+        </ul>
+    </section>
+
+    <section>
+        <h4>PDE - define dependencies / build path</h4>
+        <img src="images/pde/22-import-packages.png" height="520px" />
+    </section>
+
+    <section>
+        <h4>PDE - create consumer command</h4>
+        <p>copy the following snippet and paste it into src folder</p>
+        <pre><code class="hljs" data-trim contenteditable>
+package examples.pde.command;
+
+import org.osgi.service.component.annotations.*;
+import examples.service.api.StringModifier;
+
+@Component(
+	property = { 
+		"osgi.command.scope"    + "=zExampleModifier",
+		"osgi.command.function" + "=modify" }, 
+	service = StringModifierCommand.class
+)
+public class StringModifierCommand {
+
+	private StringModifier modifier;
+
+	@Reference
+	void bindStringModifier(StringModifier modifier) {
+		this.modifier = modifier;
+	}
+
+	public void modify(String message) {
+		System.out.println(modifier.modify(message));
+	}
+}
+        </code></pre>
+    </section>
+
+    <section>
+        <h4>PDE - @Reference - Event Strategy</h4>
+        <p>update the StringModifierCommand</p>
+        <pre><code class="hljs" data-trim contenteditable>
+            @Reference
+            void bindStringModifier(StringModifier modifier) {
+                this.modifier = modifier;
+            }
+            
+            void updatedStringModifier(StringModifier modifier, Map&lt;String, ?&gt; properties) {
+                properties.forEach((k,v) -> {System.out.println(k + " : " + v);} );
+            }
+            
+            void unbindStringModifier(StringModifier modifier) {
+                this.modifier = null;
+            }
+            
+            public void modify(String message) {
+                System.out.println(modifier.modify(message));
+            }        
+        </code></pre>
+    </section>
+    
+</section>
+
+<section id="exec1-pde-launch">
+    <section data-markdown>
+        #### Excercise 1 - PDE - Simple Service
+        
+        * Service API
+        * Service Implementation
+        * Service Consumer
+        * **Launch from IDE**
+        * Export and launch standalone
+    </section>
+
+    <section>
+        <h4>PDE - create launch configuration 1/3</h4>
+        <ul>
+            <li>select from menu: <code>Run -> Run configurations ...</code></li>
+            <li>right-click OSGi Framework, select New and specify name <code>simple_runtime</code></li>
+            <li>select the Default Auto-Start: true</li>
+            
+            <li>remove all and then select only the following bundles
+            <small><table>
+                <thead>
+                    <tr>
+                        <th>bundle</th>
+                        <th>purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>examples.pde.command</td>
+                        <td>application service consumer</td>
+                    </tr>
+                    <tr>
+                        <td>examples.pde.impl.inverter</td>
+                        <td>application service implementation</td>
+                    </tr>
+                    <tr>
+                        <td>examples.pde.service.api</td>
+                        <td>application service api</td>
+                    </tr>
+                    <tr>
+                        <td>org.apache.felix.gogo.command</td>
+                        <td>OSGi console commands</td>
+                    </tr>
+                    <tr>
+                        <td>org.apache.felix.gogo.runtime</td>
+                        <td>OSGi console runtime</td>
+                    </tr>
+                    <tr>
+                        <td>org.apache.felix.gogo.shell</td>
+                        <td>OSGi console shell</td>
+                    </tr>
+                </tbody>
+            </table></small>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h4>PDE - create launch configuration 2/3</h4>
+        <ul>
+            <li>additionally add the following bundles
+            <small><table>
+                <thead>
+                    <tr>
+                        <th>bundle</th>
+                        <th>purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>org.eclipse.equinox.console</td>
+                        <td>Equinox OSGi console</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.equinox.ds</td>
+                        <td>Equinox Declarative Services</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.equinox.util</td>
+                        <td>Equinox Util bundle</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.osgi</td>
+                        <td>Equinox OSGi runtime</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.osgi.services</td>
+                        <td>Equinox OSGi service interfaces</td>
+                    </tr>
+                </tbody>
+            </table></small>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h4>PDE - create launch configuration 3/3</h4>
+        <img src="images/pde/30_simple-runtime-launch.png" height="580px" />
+    </section>
+
+    <section>
+        <h4>PDE - execute launch configuration</h4>
+        <ul>
+            <li>launch the <code>simple_runtime</code></li>
+            <li>enter in the console view <code>modify example</code></li>
+            <img src="images/pde/31_simple-runtime-console.png" height="200px" />
+        </ul>
+    </section>
+</section>
+
+<section id="exec1-pde-export">
+    <section data-markdown>
+        #### Excercise 1 - PDE - Simple Service
+        
+        * Service API
+        * Service Implementation
+        * Service Consumer
+        * Launch from IDE
+        * **Export and launch standalone**
+    </section>
+
+    <section data-markdown>
+        ####PDE - Prepare Equinox standalone runtime
+
+        * extract the provided resources ```equinox_oxygen_runtime.zip``` into e.g. *C:\ece2016\equinox_oxygen_runtime*
+        * No platform specifix launcher!
+        * Customized configurator to support auto starting all installed bundles - [Source on GitHub](https://github.com/fipro78/equinox-autoconfigurator)
+        * Adapted ```configuration/config.ini```
+            * auto-start the auto configurator
+            * ensure the default application is not started
+        * plugins folder contains Equinox bundles
+    </section>
+
+    <section>
+        <h4>PDE - Export application bundles</h4>
+        <ul>
+            <li>export bundles via <code>File -> Export ... -> Plug-in Development -> Deployable plug-ins and fragments</code></li>
+            <li>provide directory <code>C:\ece2016\equinox_oxygen_runtime</code></li>
+        </ul>
+        <img src="images/pde/40_export-plugins.png" height="320px" />
+        <img src="images/pde/41_export-plugins_2.png" height="320px" />
+    </section>
+
+    <section>
+        <h4>PDE - Launch standalone runtime</h4>
+        <ul>
+            <li>open a cmd/shell window inside <code>C:\ece2016\equinox_oxygen_runtime</code></li>
+            <li>launch start.[cmd|sh]</li>
+            <li>type in the console <code>modify example</code></li>
+        </ul>
+        <img src="images/pde/42_standalone-runtime-launch.png" height="220px" />
+    </section>
+</section>
+
+<section id="exec1-bnd-api">
+    <section data-markdown>
+        #### Excercise 1 - bndtools - Simple Service
+        
+        * **Service API**
+        * Service Implementation
+        * Service Consumer
+        * Launch from IDE
+        * Export and launch standalone
+    </section>
+
+    <section data-markdown>
+        #### bndtools - open bndtools perspective
+        * switch to the Plug-in Development perspective
+        * open perspective button in upper right corner  
+        * select the "Plug-in Development" perspective
+    
+        ![pic1](images/eclipse-perspective-button.png)
+        ![pic2](images/bnd/01_bndtools-perspective-selection.png)
+    </section>
+
+    <section>
+        <h4>bndtools - create workspace</h4>
+        <p>
+            select from menu:<br>
+            <code>File -> New -> Bnd OSGi Workspace</code><br>
+            <code>GitHub -> bndtools/workspace</code>
+        </p>
+        <img src="images/bnd/02-create-workspace-1.png" height="280px" />
+        <img src="images/bnd/03-create-workspace-2.png" height="280px" />
+        <img src="images/bnd/04-create-workspace-3.png" height="280px" />
+    </section>
+
+    <section>
+        <h4>bndtools - verify workspace</h4>
+        <p>
+            The Repositories view contains entries, as shown below.
+        </p>
+        <img src="images/bnd/05-bndtools-workspace.png" height="360px" />
+    </section>
+
+    <section>
+        <h4>bndtools - create API project and interface package</h4>
+        <ul>
+            <li><code>File -> New -> Bnd OSGi Project</code></li>
+            <li>Project Name: <code>examples.bndtools.service.api</code></li>
+            <li>Java Package: <code>examples.bndtools.service.api</code></li>
+            <img src="images/bnd/06-create-api-project_1.png" height="280px" />
+            <img src="images/bnd/07-create-api-project_2.png" height="280px" />
+            <img src="images/bnd/08-create-api-project_3.png" height="280px" />
+        </ul>
+    </section>
+
+    <section>
+    <h4>bndtools - update API interface</h4>
+        <ul>
+            <li>delete the Example*Interface.java files in the package</li>
+            <li>copy the following snippet and paste it into src folder</li>
+        </ul>
+        <pre><code class="hljs" data-trim contenteditable>
+package examples.service.api;
+public interface StringModifier {
+	String modify(String input);
+}
+        </code></pre>
+        <img src="images/pde/04_create-api.png" height="360px" />
+    </section>
+
+    <section>
+        <h4>bndtools - adding additional Manifest properties</h4>
+        <ul>
+            <li>Inside the Bnd Editor on the Source Tab add<br/> 
+            <code>Bundle-Name: Example Service API</code>
+            </li>
+        </ul>
+        <img src="images/bnd/09-add-manifest-properties.png" height="420px" />
+    </section>
+
+    <section>
+        <h4>bndtools - investigate generated bundle</h4>
+        <ul>
+            <li>you successfully created the Service API Bundle</li>
+            <li>investigate <code>&lt;prj&gt;/generated</code> folder</li>
+        </ul>
+        <img src="images/bnd/10_generated-bundle.png" height="420px" />
+    </section>
+</section>
+
+<section id="exec1-bnd-impl">
+    <section data-markdown>
+        #### Excercise 1 - bndtools - Simple Service
+        
+        * Service API
+        * **Service Implementation**
+        * Service Consumer
+        * Launch from IDE
+        * Export and launch standalone
+    </section>
+
+    <section>
+        <h4>bndtools - create implementation project</h4>
+        <ul>
+            <li><code>File -> New -> Bnd OSGi Project</code></li>
+            <li>Project and Java Package Name: <br>
+                <code>examples.bndtools.impl.inverter</code></li>
+            <img src="images/bnd/20-create-impl-project_1.png" height="280px" />
+            <img src="images/bnd/21-create-impl-project_2.png" height="280px" />
+            <img src="images/bnd/22-create-impl-project_3.png" height="280px" />
+        </ul>
+    </section>
+
+    <section>
+        <h4>bndtools - define dependencies / build path</h4>
+        <ul>
+            <li>Inside Bnd Editor on the Build Tab<br/> 
+            <code>examples.bndtools.service.api</code>
+            </li>
+        </ul>
+        <img src="images/bnd/23-define-dependencies.png" height="360px" />
+        <img src="images/bnd/24-define-dependencies_2.png" height="360px" />
+    </section>
+
+    <section>
+    <h4>bndtools - implementation</h4>
+        <ul>
+            <li>delete the Example.java files in the package</li>
+            <li>copy the following snippet and paste it into src folder</li>
+        </ul>
+        <pre><code class="hljs" data-trim contenteditable>
+package examples.bndtools.impl.inverter;
+
+import org.osgi.service.component.annotations.*;
+import examples.service.api.StringModifier;
+
+@Component
+public class StringInverterImpl implements StringModifier {
+	@Override
+	public String modify(String input) {
+		return new StringBuilder(input).reverse().toString();
+	}
+	@Activate
+	void activate() {
+		System.out.println(this.getClass() + " activated");
+	}
+	@Deactivate
+	void deactivate() {
+		System.out.println(this.getClass() + " deactivated");
+	}
+}
+        </code></pre>
+    </section>
+
+    <section>
+        <h4>bndtools - investigate generated bundle</h4>
+        <ul>
+            <li>you successfully created the impl bundle it looks like this</li>
+        </ul>
+        <img src="images/bnd/25_impl-bundle-bnd.png" height="320px" />
+        <img src="images/bnd/26_impl-bundle-generated.png" height="320px" />
+    </section>
+</section>
+
+<section id="exec1-bnd-consumer">
+    <section data-markdown>
+        #### Excercise 1 - bndtools - Simple Service
+        
+        * Service API
+        * Service Implementation
+        * **Service Consumer**
+        * Launch from IDE
+        * Export and launch standalone
+    </section>
+
+    <section>
+        <h4>bndtools - create consumer project</h4>
+        <ul>
+            <li><code>File -> New -> Bnd OSGi Project</code></li>
+            <li>Project and Java Package Name: <br>
+                <code>examples.bndtools.command</code></li>
+            <img src="images/bnd/30-create-consumer-project_1.png" height="280px" />
+            <img src="images/bnd/31-create-consumer-project_2.png" height="280px" />
+            <img src="images/bnd/32-create-consumer-project_3.png" height="280px" />
+        </ul>
+    </section>
+
+    <section>
+        <h4>bndtools - define dependencies / build path</h4>
+        <ul>
+            <li>Inside Bnd Editor on the Build Tab</br>
+            <code>examples.bndtools.service.api</code>
+            </li>
+        </ul>
+        <img src="images/bnd/33-define-dependencies.png" height="360px" />
+        <img src="images/bnd/34-define-dependencies_2.png" height="360px" />
+    </section>
+
+    <section>
+    <h4>bndtools - consumer implementation</h4>
+        <ul>
+            <li>delete the Example.java files in the package</li>
+            <li>copy the following snippet and paste it into src folder</li>
+        </ul>
+        <pre><code class="hljs" data-trim contenteditable>
+package examples.bndtools.command;
+import org.osgi.service.component.annotations.*;
+import examples.service.api.StringModifier;
+
+@Component(
+	property = { 
+		"osgi.command.scope"    + "=zExampleModifier",
+		"osgi.command.function" + "=modify" }, 
+	service = StringModifierCommand.class
+)
+public class StringModifierCommand {
+
+	@Reference
+	private StringModifier modifier;
+
+	public void modify(String message) {
+		System.out.println(modifier.modify(message));
+	}
+}        </code></pre>
+    </section>
+
+    <section>
+        <h4>bndtools - investigate generated bundle</h4>
+        <ul>
+            <li>consumer bundle is successfully created if it looks like this</li>
+        </ul>
+        <img src="images/bnd/35_consumer-bundle-src.png" height="320px" />
+        <img src="images/bnd/36_consumer-bundle-bnd.png" height="320px" />
+    </section>
+</section>
+
+<section id="exec1-bnd-launch-ide">
+    <section data-markdown>
+        #### Excercise 1 - bndtools - Simple Service
+        
+        * Service API
+        * Service Implementation
+        * Service Consumer
+        * **Launch from IDE**
+        * Export and launch standalone
+    </section>
+
+    <section>
+        <h4>bndtools - Launch from IDE - prepare</h4>
+        <ul>
+            <li>Open the file <code>launch.bndrun</code> from project<code>examples.bndtools.impl.inverter</code></li>
+            <li>Select OSGi Framework <code>org.apache.felix.framework;version='[5.4.0,5.4.0]'</code></li>
+            <li>Select Execution Environment: <code>JavaSE-1.8</code></li>
+            <li>In the Run Requirements add the following bundles
+            <small><table>
+                <thead>
+                    <tr>
+                        <th>bundle</th>
+                        <th>purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>examples.pde.command</td>
+                        <td>application service consumer</td>
+                    </tr>
+                    <tr>
+                        <td>examples.pde.impl.inverter</td>
+                        <td>application service implementation</td>
+                    </tr>
+                    <tr>
+                        <td>examples.pde.service.api</td>
+                        <td>application service api</td>
+                    </tr>
+                    <tr>
+                        <td>org.apache.felix.configadmin</td>
+                        <td>Apache Configuration Admin </br><small> only required due to bug in Apache Felix SCR 2.0.6</small></td>
+                    </tr>
+                    <tr>
+                        <td>org.apache.felix.metatype</td>
+                        <td>Apache OSGi Metatype Service </br><small> only required due to bug in Apache Felix SCR 2.0.6</small></td>
+                    </tr>
+                </tbody>
+            </table></small>
+            <img src="images/bnd/40_add-bundle-requirements.png" height="250px" />
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h4>bndtools - Launch from IDE - resolve</h4>
+        <ul>
+            <li>press the resolve button</li>
+            <img src="images/bnd/41_resolve.png" height="300px" />
+            <img src="images/bnd/42_resolved-bundles.png" height="340px" />
+        </ul>
+    </section>
+
+    <section>
+        <h4>bndtools - Launch from IDE - run</h4>
+        <ul>
+            <li>you can now launch this config via button <code>"Run OSGi"</code></li>
+            <li>enter into the console <code>modify example</code></li>
+            <img src="images/bnd/43_bnd-editor-launch.png" height="440px" />
+        </ul>
+    </section>
+</section>
+
+<section id="exec1-bnd-export">
+    <section data-markdown>
+        #### Excercise 1 - bndtools - Simple Service
+        
+        * Service API
+        * Service Implementation
+        * Service Consumer
+        * Launch from IDE
+        * **Export and launch standalone**
+    </section>
+
+    <section>
+        <h4>bndtools - export "MegaJar"</h4>
+        <ul>
+            <li>start export via button <code>Export</code> on the top-right</li>
+            <li>select executable jar</li>
+            <li>Export to JAR: <code>C:\tmp\inverter.jar</code></li>
+            <img src="images/bnd/50_export-wizard-executable-jar.png" height="300px" />
+            <img src="images/bnd/51_export-wizard-executable-jar_2.png" height="300px" />
+        </ul>
+    </section>
+
+    <section>
+        <h4>bndtools - run stand-alone "MegaJar"</h4>
+        <ul>
+            <li>open a cmd/shell window inside <code>C:\tmp</code></li>
+            <li>launch <code>java -jar inverter.jar</code></li>
+            <li>type in the console <code>modify example</code></li>
+        </ul>
+        <img src="images/bnd/52_standalone-runtime-launch.png" height="200px" />
+    </section>
+</section>
+
+<section id="exec2-osgi-console">
+
+    <section data-markdown>
+        #### Excercise 2 - OSGi console
+    </section>
+
+    <section>
+    <h4>Excercise 2 - Lifecycle Methods</h4>
+        <ul>
+            <li>Add <code>@Activate</code> and <code>@Deactivate</code> methods to <br>
+            <code>StringInverterImpl</code> and <code>StringModifierCommand</code></li>
+        </ul>
+        <pre><code class="hljs" data-trim contenteditable>
+@Activate
+void activate() {
+    System.out.println(this.getClass() + " activated");
+}
+
+@Deactivate
+void deactivate() {
+    System.out.println(this.getClass() + " deactivated");
+}
+        </code></pre>
+    </section>
+
+    <section>
+        <h4>Excercise 2 - OSGi console</h4>
+        <ul>
+            <li>Execute in OSGi shell and inspect the behaviour
+            <small><table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Equinox in PDE</th>
+                        <th>Felix in bndtools</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>List all components to see state and component id</td>
+                        <td><code>list</code></td>
+                        <td><code>scr:list</code></td>
+                    </tr>
+                    <tr>
+                        <td>Execute the modify command to activate the components and check the console output</td>
+                        <td><code>modify test</code></td>
+                        <td><code>modify test</code></td>
+                    </tr>
+                    <tr>
+                        <td>List all components again to verify the state change</td>
+                        <td><code>list</code></td>
+                        <td><code>scr:list</code></td>
+                    </tr>
+                    <tr>
+                        <td>Disable StringInverterImpl and check the console output</td>
+                        <td><code>dis</code></td>
+                        <td><code>scr:disable examples.bndtools.<br>
+                        impl.inverter.StringInverterImpl</code></td>
+                    </tr>
+                    <tr>
+                        <td>List all components again to verify the state change</td>
+                        <td><code>list</code></td>
+                        <td><code>scr:list</code></td>
+                    </tr>
+                    <tr>
+                        <td>Enable StringInverterImpl and check the console output</td>
+                        <td><code>en &lt;component id&gt;</code></td>
+                        <td><code>scr:enable examples.bndtools.<br>
+                        impl.inverter.StringInverterImpl</code></td>
+                    </tr>
+                    <tr>
+                        <td>List all components again to verify the state change</td>
+                        <td><code>list</code></td>
+                        <td><code>scr:list</code></td>
+                    </tr>
+                </tbody>
+            </table></small>
+            </li>
+        </ul>
+    </section>
+</section>
+
+<section id="exec3-configuration">
+
+    <section data-markdown>
+        #### Excercise 3 - Configuration
+        
+        * **Configurable Service**
+        * Configuration Command
+        * Update StringModifierCommand
+        * Launch IDE
+        * Optional exercise
+    </section>
+
+    <section>
+        <h4>PDE - create project for Configurable Component</h4>
+        <ul>
+            <li>select from menu: <code>File -&gt; New -&gt; Plug-in Project</code></li>
+            <li>Project name: <code>examples.pde.impl.configurable</code></li>
+            <img src="images/pde/50_create-prj-configurable.png" height="440px" />
+            <img src="images/pde/51_create-prj-configurable.png" height="440px" />
+        </ul>
+    </section>
+
+    <section>
+        <h4>PDE - define dependencies / build path</h4>
+        <ul>
+            <li>Import package: <code>examples.service.api</code></li>
+            <li>Specify the upper bound version: <code>2.0.0</code></li>
+            <li>Import package: <code>org.osgi.service.component.annotations</code></li>
+            <li>Specify resolution: <code>optional</code></li>
+            <img src="images/pde/12-import-packages_2.png" height="280px" />
+            <img src="images/pde/12-import-packages_3.png" height="280px" />
+        </ul>
+    </section>
+
+    <section>
+        <h4>PDE - define component properties for DS &lt; 1.3 </h4>
+        <p>copy the following snippet and paste it into src folder</p>
+        <pre><code class="hljs" data-trim contenteditable>
+package examples.pde.impl.configurable;
+
+public interface Constants {
+	String PREFIX = "prefix";
+	String SUFFIX = "suffix";
+	String ITERATION = "iteration";
+	String UPPER_CASE = "uppercase";
+}
+        </code></pre>
+    </section>
+
+    <section data-markdown>
+        #### PDE - Implementation Configurable Component
+        
+        * create package ```examples.pde.impl.configurable```
+        * create inside a class ```StringManipulator implements StringModifier```
+        * set property configuration PID to manipulator
+        * set the configuration policy to REQUIRE
+        * store the Component Properties in a member variable via @Activate and @Modified
+        * implement ```modify(String)``` to create a modified version of the input String taking the configuration into account
+    </section>
+    
+    <section>
+        <h4>PDE - Implementation Configurable Component</h4>
+        <p>
+            if you did not implemented it yourself, </br>
+            copy the following snippet and paste it into src folder
+        </p>
+        <pre><code class="hljs" data-trim contenteditable>
+package examples.pde.impl.configurable;
+import java.util.Map;
+import org.osgi.service.component.annotations.*;
+import examples.service.api.StringModifier;
+
+@Component(
+	    configurationPid="manipulator",
+	    configurationPolicy=ConfigurationPolicy.REQUIRE
+	)
+public class StringManipulator implements StringModifier {
+
+	Map&lt;String, Object&gt; config;
+	
+	@Activate
+	void activate(Map&lt;String, Object&gt; config) {
+		System.out.println(this.getClass() + " activated");
+		this.config = config;
+	}
+	
+	@Modified
+	void modified(Map&lt;String, Object&gt; config) {
+		this.config = config;
+	}
+
+	public void deactivate() {
+		System.out.println(this.getClass() + " de-activated");
+	}
+
+	@Override
+	public String modify(String input) {
+		String prefix = (String) config.getOrDefault(Constants.PREFIX, "");
+		String suffix = (String) config.getOrDefault(Constants.SUFFIX, "");
+		Integer iteration = (Integer) config.getOrDefault(Constants.ITERATION, Integer.valueOf(1));
+		Boolean upperCase = (Boolean) config.getOrDefault(Constants.UPPER_CASE, Boolean.FALSE);
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append(prefix);
+		
+		for (int i = 0; i &lt; iteration; i++) {
+			builder.append(upperCase ? input.toUpperCase() : input);
+		}
+		builder.append(suffix);
+		return builder.toString();
+	}
+}
+        </code></pre>
+    </section>
+
+    <section data-markdown>
+        #### Excercise 3 - Configuration
+        
+        * Configurable Service
+        * **Configuration Command**
+        * Update StringModifierCommand
+        * Launch IDE
+        * Optional exercise
+    </section>
+
+    <section data-markdown>
+        #### PDE - Configuration Command
+        * open MANIFEST.MF in examples.pde.impl.configurable
+        * switch to the Dependencies tab
+        * add org.osgi.service.cm to the Imported Packages </br>(don‘t forget the upper bounds!)
+        * create a Gogo Shell command in examples.pde.impl.configurable package
+        * reference the ConfigurationAdmin service
+        * specify the osgi.command.function=config and implement the corresponding method
+    </section>
+
+    <section>
+        <h4>PDE - Configuration Command</h4>
+        <p>
+            if you did not implemented it yourself, </br>
+            copy the following snippet and paste it into src folder
+        </p>
+        <pre><code class="hljs" data-trim contenteditable>
+package examples.pde.impl.configurable;
+
+import java.io.IOException;
+import java.util.Dictionary;
+import java.util.Hashtable;
+
+import org.osgi.service.cm.Configuration;
+import org.osgi.service.cm.ConfigurationAdmin;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+@Component(
+		property = { 
+				"osgi.command.scope:String=zExamplesModifier",
+				"osgi.command.function:String=config" 
+		}, 
+		service = ConfigCommand.class)
+public class ConfigCommand {
+
+	ConfigurationAdmin cm;
+	
+	@Reference
+	void setConfigAdmin(ConfigurationAdmin cm) {
+		this.cm = cm;
+	}
+	
+	public void config(String key, String value) throws IOException {
+		if (Constants.PREFIX.equals(key) || Constants.SUFFIX.equals(key)) {
+			Configuration config = cm.getConfiguration("manipulator");
+			Dictionary&lt;String, Object&gt; props = null;
+			if (config != null && config.getProperties() != null) {
+				props = config.getProperties();
+			} else {
+				props = new Hashtable&lt;&gt;();
+			}
+			props.put(key, value);
+			config.update(props);
+		} else {
+			System.err.println("invalid key to value mapping");
+		}
+	}
+	
+	public void config(String key, Integer value) throws IOException {
+		if (Constants.ITERATION.equals(key)) {
+			Configuration config = cm.getConfiguration("manipulator");
+			Dictionary&lt;String, Object&gt; props = null;
+			if (config != null && config.getProperties() != null) {
+				props = config.getProperties();
+			} else {
+				props = new Hashtable&lt;&gt;();
+			}
+			props.put(key, value);
+			config.update(props);
+		} else {
+			System.err.println("invalid key to value mapping");
+		}
+	}
+	
+	public void config(String key, Boolean value) throws IOException {
+		if (Constants.UPPER_CASE.equals(key)) {
+			Configuration config = cm.getConfiguration("manipulator");
+			Dictionary&lt;String, Object&gt; props = null;
+			if (config != null && config.getProperties() != null) {
+				props = config.getProperties();
+			} else {
+				props = new Hashtable&lt;&gt;();
+			}
+			props.put(key, value);
+			config.update(props);
+		} else {
+			System.err.println("invalid key to value mapping");
+		}
+	}
+}
+        </code></pre>
+    </section>
+
+    <section data-markdown>
+        #### Excercise 3 - Configuration
+        
+        * Configurable Service
+        * Configuration Command
+        * **Update StringModifierCommand**
+        * Launch IDE
+        * Optional exercise
+    </section>
+
+    <section data-markdown>
+        #### PDE- Update StringModifierCommand
+    
+        * change the implementation of ```StringModifierCommand``` to reference multiple ```StringModifier```
+        * it needs ```AT_LEAST_ONE``` to be satisfied
+        * add an updated event method to get notified on configuration changes
+        * this method will only get called after the ```StringModifierCommand``` is activated (```modify``` needs to be called once)
+    </section>
+
+    <section>
+        <h4>PDE - Update StringModifierCommand</h4>
+        <p>
+            if you did not implemented it yourself, </br>
+            copy the following snippet and paste it into src folder
+        </p>
+        <pre><code class="hljs" data-trim contenteditable>
+package examples.pde.command;
+
+import java.util.*;
+import org.osgi.service.component.annotations.*;
+import examples.service.api.StringModifier;
+
+@Component(
+		property = { 
+				"osgi.command.scope:String=zExampleModifier",
+				"osgi.command.function:String=modify" 
+		}, 
+		service = StringManipulatorCommand.class
+)
+public class StringManipulatorCommand {
+
+	private List&lt;StringModifier&gt; modifier = new ArrayList&lt;&gt;();
+
+	@Activate
+	void activate() {
+		System.out.println(this.getClass() + " activated");
+	}
+
+	@Deactivate
+	void deactivate() {
+		System.out.println(this.getClass() + " deactivated");
+	}
+	
+	@Reference(
+			cardinality=ReferenceCardinality.AT_LEAST_ONE,
+			policy=ReferencePolicy.DYNAMIC
+	)
+	void bindStringModifier(StringModifier modifier) {
+		this.modifier.add(modifier);
+	}
+	
+	void unbindStringModifier(StringModifier modifier) {
+		this.modifier.remove(modifier);
+	}
+	
+	void updatedStringModifier(StringModifier modifier, Map&lt;String, Object&gt; properties) {
+		System.out.println(modifier.getClass() + " configuration updated");
+		properties.forEach((key, value) -&gt; System.out.println(key + " = " + value));
+	}
+
+	public void modify(String input) {
+		modifier.forEach(m -&gt; System.out.println(m.modify(input)));
+	}
+}
+
+        </code></pre>
+    </section>
+
+    <section data-markdown>
+        #### Excercise 3 - Configuration
+        
+        * Configurable Service
+        * Configuration Command
+        * Update StringModifierCommand
+        * **Launch IDE**
+        * Optional exercise
+    </section>
+
+    <section>
+        <h4>PDE - Launch in IDE</h4>
+        <ul>
+            <li>copy an existing Run Configuration and add the following bundles:
+            <small><table>
+                <thead>
+                    <tr>
+                        <th>bundle</th>
+                        <th>purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>examples.pde.impl.configurable</td>
+                        <td>Application Bundle</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.equinox.cm</td>
+                        <td>Equinox Configuration Admin Service</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.equinox.metatype</td>
+                        <td>Equinox Metatype Service</td>
+                    </tr>
+                </tbody>
+            </table></small>
+            </li>
+            <li>run</li>
+            <li>execute in console: <code>config uppercase true</code></li>
+            <li>execute in console: <code>modify test</code></li>
+            <li>verify the result: <code>modify test</code></li>
+        </ul>
+    </section>
+
+    <section data-markdown>
+        #### Excercise 3 - Configuration
+        
+        * Configurable Service
+        * Configuration Command
+        * Update StringModifierCommand
+        * Launch IDE
+        * **Optional exercise**
+    </section>
+
+    <section>
+        <h4>PDE - Optional exercise 1/2</h4>
+        <ul>
+            <li>stop the <code>examples.pde.impl.configurable</code> bundle</li>
+            <li>verify that the <code>StringModifierCommand</code> gets deactivated</li>
+            <li>stop the <code>examples.pde.impl.configurable</code> bundle</li>
+            <li> change the <code>StringModifier</code> reference to dynamic
+        <pre><code class="hljs" data-trim contenteditable>
+@Reference(
+    cardinality=ReferenceCardinality.AT_LEAST_ONE,
+    policy=ReferencePolicy.DYNAMIC
+)
+void bindStringModifier(StringModifier modifier) {
+	this.modifier.add(modifier);
+}
+        </code></pre>            
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h4>PDE - Optional exercise 2/2</h4>
+        <ul>
+            <li>start the application</li>
+            <li>stop the <code>examples.pde.impl.configurable</code> bundle</li>
+            <li>verify that the <code>StringModifierCommand</code> is not deactivated</li>
+        </ul>
+    </section>
+</section>
+
+<section id="exec4-webconsole">
+
+    <section data-markdown>
+        #### Excercise 4 - Webconsole
+    </section>
+
+    <section>
+        <h4>PDE - Launch from IDE with Webconsole</h4>
+        <ul>
+            <li>copy an existing Run Configuration and add the following
+            <small><table>
+                <thead>
+                    <tr>
+                        <th>bundle</th>
+                        <th>purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>javax.servlet</td>
+                        <td>Servlet API</td>
+                    </tr>
+                    <tr>
+                        <td>org.apache.felix.webconsole</td>
+                        <td>Apache Felix Webconsole (all)</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.equinox.http.jetty</td>
+                        <td>Equinox OSGi Http Service</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.equinox.http.servlet</td>
+                        <td>Equinox OSGi Http Service</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.jetty.continuation</td>
+                        <td>Eclipse Jetty</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.jetty.http</td>
+                        <td>Eclipse Jetty</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.jetty.io</td>
+                        <td>Eclipse Jetty</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.jetty.security</td>
+                        <td>Eclipse Jetty</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.jetty.server</td>
+                        <td>Eclipse Jetty</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.jetty.servlet</td>
+                        <td>Eclipse Jetty</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.jetty.util</td>
+                        <td>Eclipse Jetty</td>
+                    </tr>
+                </tbody>
+            </table></small>
+            </li>
+        </ul>
+    </section>
+
+    <section data-markdown>
+        #### PDE - Launch from IDE with Webconsole
+        
+        * switch to the Arguments tab
+        * add to the VM arguments: ```-Dorg.osgi.service.http.port=8888```
+        * run
+        
+        * open a Webbrowser on URL: http://localhost:8888/system/console
+        * enter Webconsole credentials
+            * user: admin
+            * password: admin
+    </section>
+    
+    <section data-markdown>
+        #### PDE - Launch standalone runtime with Webconsole
+        
+        * extract the provide archive <code>http_jetty_webconsole_bundles.zip</code> into e.g. *C:\ece2016\equinox_oxygen_runtime*
+        * start the application with the start_jetty.[bat|sh] script
+        * open a Webbrowser on URL: http://localhost:8888/system/console
+        * enter Webconsole credentials
+            * user: admin
+            * password: admin
+
+        * **Not working? - see next slide**
+    </section>
+
+    <section data-markdown>
+        #### PDE - Launch standalone runtime with Webconsole
+        * Problem analysis Jetty / Webconsole
+            * check if the Jetty Http Service is started
+            * list all installed bundles via console (ss | lb)
+            * determine the bundle id of Jetty Http Service / ```org.eclipse.equinox.http.jetty```
+            * start that bundle via ```start &lt;bundle-id&gt;```
+    </section>
+
+</section>
+
+
+<section id="exec5-rsa">
+
+    <section data-markdown>
+        #### Excercise 5 - Remote Service Admin
+    </section>
+
+    <section>
+        <h4>Remote Service properties</h4>
+        <p>Modify the StringManipulator and add the necessary Remote Service Admin properties 
+        <pre><code class="hljs" data-trim contenteditable>
+@Component(
+    configurationPid="manipulator",
+    configurationPolicy=ConfigurationPolicy.REQUIRE,
+    property= { "service.exported.interfaces=*",
+                "service.exported.configs=ecf.generic.server" }
+)
+public class StringManipulator implements StringModifier {
+        </code></pre>
+    </section>
+
+    <section>
+        <h4>Launch from IDE with RSA 1/2</h4>
+        <ul>
+            <li>copy an existing Run Configuration and add the following
+            <small><table>
+                <thead>
+                    <tr>
+                        <th>bundle</th>
+                        <th>purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>javax.servlet</td>
+                        <td>Servlet API</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.core.jobs</td>
+                        <td>Eclipse / Equinox Concurrency</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.equinox.common</td>
+                        <td>Eclipse / Equinox Concurrency</td>
+                    </tr>
+                    <tr>
+                        <td>org.eclipse.equinox.concurrent</td>
+                        <td>Eclipse / Equinox Concurrency</td>
+                    </tr>
+                </tbody>
+            </table></small>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h4>Launch from IDE with RSA 2/2</h4>
+        <ul>
+            <li>additionally add the following bundles from </br>Eclipse Communication Framework</li>
+            <small>
+                        <li>org.eclipse.ecf</li>
+                        <li>org.eclipse.ecf.discovery</li>
+                        <li>org.eclipse.ecf.identity</li>
+                        <li>org.eclipse.ecf.osgi.services.distribution</li>
+                        <li>org.eclipse.ecf.osgi.services.remoteserviceadmin</li>
+                        <li>org.eclipse.ecf.osgi.services.remoteserviceadmin.proxy</li>
+                        <li>org.eclipse.ecf.provider</li>
+                        <li>org.eclipse.ecf.provider.jmdns</li>
+                        <li>org.eclipse.ecf.provider.remoteservice</li>
+                        <li>org.eclipse.ecf.remoteservice</li>
+                        <li>org.eclipse.ecf.remoteservice.asyncproxy</li>
+                        <li>org.eclipse.ecf.sharedobject</li>
+                        <li>org.eclipse.osgi.services.remoteserviceadmin</li>
+            </small>
+        </ul>
+    </section>
+    
+    <section>
+        <h4>Launch in standalone runtime - Equinox/PDE</h4>
+        <small><ul> 
+            <li>extract the provided archive <code>ecf_rsa_bundles.zip</code> to the plugins directory of the created runtime e.g. <i>C:\ece2016\equinox_oxygen_runtime</i></li>
+            <li>export bundles via </br>
+                <code>File -&gt; Export… -&gt; Plug-in Development -&gt; Deployable plug-ins and fragments</code></li>
+            <li>press <code>Next</code></li>
+            <li>select the created example bundles: <code>examples.pde.*</code></li>
+            <li>select the runtime directory (e.g. <i>C:\ece2016\equinox_oxygen_runtime</i>)</li>
+            <li>press <code>Finish</code></li>
+        </ul></small>
+
+        <p>start the application with the start script:</br>
+            <code>start_jetty.[bat|sh]</code>
+        </p>
+    </section>
+    
+    <section>
+        <h4>Launch in standalone runtime - Equinox</h4>
+        <small><ul> 
+            <li>export bundles via </br>
+                <code>File -&gt; Export… -&gt; Plug-in Development -&gt; Deployable plug-ins and fragments</code></li>
+            <li>press <code>Next</code></li>
+            <li>select the created example bundles: <code>examples.pde.*</code></li>
+            <li>select the runtime directory (e.g. <i>C:\ece2016\equinox_oxygen_runtime</i>)</li>
+            <li>press <code>Finish</code></li>
+        </ul></small>
+        <p>start the application with the start script:</br>
+            <code>start_jetty.[bat|sh]</code>
+        </p>
+    </section>
+
+</section>
+
+
+<section id="references">
+    <section id="blogs" data-markdown>
+        ### blog posts
+
+        * [Getting Started with OSGi Declarative Services](http://blog.vogella.com/2016/06/21/getting-started-with-osgi-declarative-services/)
+        * [OSGi Component Testing](http://blog.vogella.com/2016/07/04/osgi-component-testing/)
+        * [Configuring OSGi Declarative Services](http://blog.vogella.com/2016/09/26/configuring-osgi-declarative-services/)
+    </section>
+    <section id="standards" data-markdown>
+        ### standards and references
+        
+        * [OSGi specifications](http://www.osgi.org/Specifications/HomePage)
+        * [enRoute Documentation](http://enroute.osgi.org/book/210-doc.html)
+        * [Semantic Versioning 2.0.0](http://semver.org/)
+        * [LDAP search filter syntax](http://tools.ietf.org/search/rfc4515)
+    </section>
+    <section id="links_Eclipse" data-markdown>
+       ### Eclipse resources
+       
+       * [Eclipse](http://eclipse.org) 
+       * [Community Forum](https://www.eclipse.org/forums/?)
+       * [Sources](https://git.eclipse.org/c/) 
+       * [Bugzilla](https://bugs.eclipse.org/bugs/)
+    </section>
+    <section id="links_Bndtools" data-markdown>
+        ### BND and Bndtools resources
+        
+        * [BND](http://www.aqute.biz/Bnd/Bnd) 
+        * [Usergroup](https://groups.google.com/forum/#!forum/Bndtools-users)
+        * [Source on Github](https://github.com/Bndtools/bnd) 
+        * [Continuous Builds from Cloudbees](https://Bndtools.ci.cloudbees.com/)
+        * [website](http://Bndtools.org/)
+        * [bug reports/source code on GitHub](https://github.com/Bndtools)
+        * [continuous build on cloudbees](https://Bndtools.ci.cloudbees.com/job/Bndtools.master/)
+        * [usergroup in GoogleGroups](https://groups.google.com/forum/#!forum/Bndtools-users)
+    </section>
+</section>
+
+        </div>
+    </div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+                slideNumber: true,
+				
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+	</body>
+</html>
