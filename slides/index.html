@@ -1662,9 +1662,9 @@ public class StringManipulator implements StringModifier {
     </section>
 
     <section>
-        <h4>Launch from IDE with RSA 1/2</h4>
+        <h4>Launch from IDE with RSA 1/2 - host</h4>
         <ul>
-            <li>copy an existing Run Configuration and name it <code>rsa</code></li>
+            <li>copy existing Run Configuration <code>configurable_runtime</code> and name it <code>ecf_host_config</code></li>
             <li>add the following bundles:
             <small><table>
                 <thead>
@@ -1690,6 +1690,10 @@ public class StringManipulator implements StringModifier {
                         <td>org.eclipse.equinox.concurrent</td>
                         <td>Eclipse / Equinox Concurrency</td>
                     </tr>
+                    <tr>
+                        <td>org.eclipse.equinox.event</td>
+                        <td>Eclipse / Equinox Event Admin</td>
+                    </tr>
                 </tbody>
             </table></small>
             </li>
@@ -1697,11 +1701,11 @@ public class StringManipulator implements StringModifier {
     </section>
 
     <section>
-        <h4>Launch from IDE with RSA 2/2</h4>
+        <h4>Launch from IDE with RSA 2/2 - host</h4>
         <ul>
             <li>additionally add the following bundles from </br>Eclipse Communication Framework</li>
             <small>
-                        <li>org.eclipse.ecf</li>
+                  <li>org.eclipse.ecf</li>
                         <li>org.eclipse.ecf.discovery</li>
                         <li>org.eclipse.ecf.identity</li>
                         <li>org.eclipse.ecf.osgi.services.distribution</li>
@@ -1712,6 +1716,7 @@ public class StringManipulator implements StringModifier {
                         <li>org.eclipse.ecf.provider.remoteservice</li>
                         <li>org.eclipse.ecf.remoteservice</li>
                         <li>org.eclipse.ecf.remoteservice.asyncproxy</li>
+                        <li>org.eclipse.ecf.remoteservice.eventadmin</li>
                         <li>org.eclipse.ecf.sharedobject</li>
                         <li>org.eclipse.osgi.services.remoteserviceadmin</li>
             </small>
