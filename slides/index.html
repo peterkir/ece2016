@@ -1231,6 +1231,7 @@ void bindStringModifier(StringModifier modifier) {
         * **Configurable Service**
         * Update StringModifierCommand
         * Launch IDE
+        * Export and launch standalone
     </section>
 
     <section>
@@ -1340,7 +1341,8 @@ public class StringManipulator implements StringModifier {
         * Configurable Service
         * **Update StringModifierCommand**
         * Launch IDE
-    </section>
+        * Export and launch standIDE
+   </section>
 
     <section data-markdown>
         #### bndtools - Update StringModifierCommand
@@ -1414,6 +1416,7 @@ public class StringModifierCommand {
         * Configurable Service
         * Update StringModifierCommand
         * **Launch IDE**
+        * Export and launch standalone
     </section>
 
     <section>
@@ -1498,6 +1501,39 @@ public class StringModifierCommand {
         * enter in the console <code>modify example</code>
     </section>
 
+    <section data-markdown>
+        #### Excercise 4 - bndtools -  Webconsole
+        
+        * Configurable Service
+        * Update StringModifierCommand
+        * Launch IDE
+        * **Export and launch standalone**
+    </section>
+
+    <section>
+        <h4>bndtools - export "MegaJar"</h4>
+        <ul>
+            <li>start export via button <code>Export</code> on the top-right</li>
+            <li>select executable jar</li>
+            <li>Export to JAR: <code>C:\ece2016\webconsole.jar</code></li>
+            <img src="images/bnd/50_export-wizard-executable-jar.png" height="300px" />
+            <img src="images/bnd/51_export-wizard-executable-jar_2.png" height="300px" />
+        </ul>
+    </section>
+
+    <section>
+        <h4>bndtools - run stand-alone "MegaJar"</h4>
+        <ul>
+            <li>open a cmd/shell window inside <code>C:\ece2016</code></li>
+            <li>launch <code>java -jar webconsole.jar</code></li>
+            <li><a href="http://localhost:8080/system/console">open a Webbrowser: localhost:8080/system/console</a></li>
+            <li>enter Webconsole credentials (user and password: admin)</li>
+            <li>navigate to <code>OSGi -> Configuration</code></li>
+            <li>provide a <code>StringManipulator Configuration</code></li>
+            <li>type in the console <code>modify example</code></li>
+        </ul>
+        <img src="images/bnd/65_standalone webconsole-runtime-launch.png" height="240px" />
+    </section>    
 </section>
 
 <section id="exec4-pde-webconsole">
