@@ -6,7 +6,11 @@ import examples.service.api.StringModifier;
 
 @Component(
 	configurationPid = "manipulator", 
-	configurationPolicy = ConfigurationPolicy.REQUIRE
+	configurationPolicy = ConfigurationPolicy.REQUIRE,
+	property= { 
+		"service.exported.interfaces=*",
+		"service.exported.configs=ecf.generic.server" 
+	}
 )
 public class StringManipulator implements StringModifier {
 
