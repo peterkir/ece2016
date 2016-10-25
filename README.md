@@ -16,8 +16,8 @@ https://www.eclipsecon.org/europe2016/session/building-nano-services-osgi-declar
 - [IDEfix Eclipse Installation Guide](https://peterkir.github.io/idefix/bootstrap/conference/ece2016/)
 
 ### oomph/eclipseInstaller product and project available
-- [oomph product.setup file](http://peterkir.github.io/oomph/public/ece2016/product-osgi.idefix.oxygen-ece2016.setup)
-- [oomph project.setup file](http://peterkir.github.io/oomph/public/ece2016/project-ece2016.setup)
+- [oomph product.setup file](https://github.com/peterkir/idefix/raw/gh-pages/oomph/public/ece2016/product-osgi.idefix.oxygen-ece2016.setup)
+- [oomph project.setup file](https://github.com/peterkir/idefix/raw/gh-pages/oomph/public/ece2016/project-ece2016.setup)
 
 
 ## Tutorial content
