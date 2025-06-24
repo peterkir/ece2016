@@ -1,14 +1,10 @@
 -buildpath: \
-	osgi.annotation;version=6.0.1,\
-	osgi.core;version=6.0,\
-	osgi.cmpn;version=6.0,\
-	examples.bndtools.service.api;version=latest
+	osgi.core,\
+	examples.bndtools.service.api;version=latest,\
+	org.osgi.service.component.annotations
 
 -testpath: \
 	${junit}
-
-javac.source: 1.8
-javac.target: 1.8
 
 Bundle-Version: 0.0.0.${tstamp}
 Private-Package: examples.bndtools.command

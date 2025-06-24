@@ -1,7 +1,5 @@
--buildpath: osgi.annotation; version=6.0.1
+-buildpath: org.osgi:org.osgi.annotation.versioning
 -baseline: *
-javac.source: 1.8
-javac.target: 1.8
 
 Bundle-Version: 1.0.0.${tstamp}
 Bundle-Name: Example Service API

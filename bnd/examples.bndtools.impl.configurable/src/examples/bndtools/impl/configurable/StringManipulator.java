@@ -1,22 +1,26 @@
 package examples.bndtools.impl.configurable;
 
-import org.osgi.service.component.annotations.*;
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.ConfigurationPolicy;
+import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.metatype.annotations.Designate;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
+
 import examples.service.api.StringModifier;
 
 @ObjectClassDefinition(name = "StringManipulator Configuration")
 @interface StringManipulatorConfig {
 	String prefix() default "";
+
 	String suffix() default "";
+
 	int repeat() default 1;
+
 	boolean uppercase() default false;
 }
 
-@Component(
-	configurationPid = "manipulator", 
-	configurationPolicy = ConfigurationPolicy.REQUIRE
-)
+@Component(configurationPid = "manipulator", configurationPolicy = ConfigurationPolicy.REQUIRE)
 @Designate(ocd = StringManipulatorConfig.class)
 public class StringManipulator implements StringModifier {
 

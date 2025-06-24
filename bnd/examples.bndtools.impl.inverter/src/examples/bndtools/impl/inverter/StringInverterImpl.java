@@ -1,6 +1,9 @@
 package examples.bndtools.impl.inverter;
 
-import org.osgi.service.component.annotations.*;
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
+
 import examples.service.api.StringModifier;
 
 @Component

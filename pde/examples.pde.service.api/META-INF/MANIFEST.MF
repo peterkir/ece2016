@@ -3,5 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Example Service API
 Bundle-SymbolicName: examples.pde.service.api
 Bundle-Version: 1.0.0
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: examples.service.api;version="1.0.0"
+Automatic-Module-Name: examples.pde.service.api
