@@ -16,8 +16,12 @@ It contains projects for Eclipse PDE (Plugin Development Environment) and as bnd
 It explains debugging via OSGi console, Apache Webconsole
 
 ### oomph/eclipseInstaller product and project available
-- [oomph product.setup file](https://peterkir.github.io/oomph/public/ece2016/product-osgi.idefix.oxygen-ece2016.setup)
 
+If eclipse installer/oomph is installed and URL handler is configured use this link
+- [oomph setup](eclipse+installer:https://raw.githubusercontent.com/peterkir/ece2016/master/oomph/config.setup)
+
+otherwise use this to get instructions on eclipse-installer/oomph setup and configuration
+- [oomph setup](https://www.eclipse.org/setups/installer/?urlhttps://raw.githubusercontent.com/peterkir/ece2016/master/oomph/config.setup&show=true)
 
 ## Tooling
 - Java 17

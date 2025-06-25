@@ -168,7 +168,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
-      name="bndtools">
+      name="p2.bndtools">
     <setupTask
         xsi:type="setup.p2:P2Task"
         label="bndtools">
@@ -184,7 +184,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
-      name="JRE">
+      name="p2.JRE">
     <setupTask
         xsi:type="setup.p2:P2Task"
         label="JRE21">
@@ -203,6 +203,22 @@
         ${scope.project.label}
       </description>
       <defaultExecutionEnvironment>JavaSE-21</defaultExecutionEnvironment>
+    </setupTask>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="p2.m2e">
+    <setupTask
+        xsi:type="setup.p2:P2Task">
+      <requirement
+          name="org.eclipse.m2e.pde.feature.feature.group"/>
+      <repository
+          url="https://download.eclipse.org/technology/epp/packages/2025-06/202506041200"/>
+      <repository
+          url="https://download.eclipse.org/releases/2025-06/202506111000">
+        <annotation
+            source="http://www.eclipse.org/oomph/setup/ReleaseTrain"/>
+      </repository>
     </setupTask>
   </setupTask>
   <stream name="none"
