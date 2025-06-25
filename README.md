@@ -18,7 +18,7 @@ It explains debugging via OSGi console, Apache Webconsole
 ### oomph/eclipseInstaller product and project available
 
 If eclipse installer/oomph is installed and URL handler is configured use this link
-- [oomph setup ece2016](eclipse+installer:https://raw.githubusercontent.com/peterkir/ece2016/master/oomph/config.setup)
+- <a href="eclipse+installer:https://raw.githubusercontent.com/peterkir/ece2016/master/oomph/config.setup">oomph setup ece2016</a>
 
 otherwise use this to get instructions on eclipse-installer/oomph setup and configuration
 - [oomph setup ece2016 with installation guide](https://www.eclipse.org/setups/installer/?urlhttps://raw.githubusercontent.com/peterkir/ece2016/master/oomph/config.setup&show=true)
