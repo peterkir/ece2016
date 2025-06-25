@@ -1,0 +1,11 @@
+-buildpath: \
+	osgi.core,\
+	osgi.cmpn,\
+	org.osgi.service.component.annotations,\
+	examples.bndtools.service.api;version=latest
+
+-testpath: \
+	${junit}
+
+Bundle-Version: 0.0.0.${tstamp}
+Private-Package: examples.bndtools.impl.configurable

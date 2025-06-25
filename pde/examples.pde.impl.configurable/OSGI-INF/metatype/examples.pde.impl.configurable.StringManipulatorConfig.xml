@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.2.0" localization="OSGI-INF/l10n/examples.pde.impl.configurable.StringManipulatorConfig">
+  <OCD id="examples.pde.impl.configurable.StringManipulatorConfig" name="StringManipulator Configuration" description="">
+    <AD id="prefix" type="String" name="Prefix" default=""/>
+    <AD id="suffix" type="String" name="Suffix" default=""/>
+    <AD id="iteration" type="Integer" name="Iteration" default="1"/>
+    <AD id="uppercase" type="Boolean" name="Uppercase" default="false"/>
+  </OCD>
+  <Designate pid="manipulator">
+    <Object ocdref="examples.pde.impl.configurable.StringManipulatorConfig"/>
+  </Designate>
+</metatype:MetaData>

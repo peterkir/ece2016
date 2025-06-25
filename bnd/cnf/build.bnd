@@ -1,0 +1,34 @@
+# Configure Repositories
+
+-plugin.2.Local: aQute.bnd.deployer.repository.LocalIndexedRepo;\
+		name                =Local;\
+		pretty              =true;\
+		local               ='C:/IDEfix/bnd-workspace-github-repo/git/ece2016/bnd/cnf/local'
+
+-plugin.3.Templates: aQute.bnd.deployer.repository.LocalIndexedRepo;\
+		name                =Templates;\
+		pretty              =true;\
+		local               ='C:/IDEfix/bnd-workspace-github-repo/git/ece2016/bnd/cnf/templates'
+
+-plugin.4.Release: aQute.bnd.deployer.repository.LocalIndexedRepo;\
+		name                =Release;\
+		pretty              =true;\
+		local               ='C:/IDEfix/bnd-workspace-github-repo/git/ece2016/bnd/cnf/release'
+
+-releaserepo: Release
+-baselinerepo: Release
+
+# JUnit
+junit: org.apache.servicemix.bundles.junit; version=4.12
+-plugin: aQute.bnd.repository.maven.provider.MavenBndRepository;\
+		name                ='Maven Repository';\
+		releaseUrl          ='https://repo.maven.apache.org/maven2/';\
+		snapshotUrl         ='https://repository.apache.org/snapshots/';\
+		local               ='~/.m2/repository';\
+		readOnly            =true;\
+		poll_time           =5;\
+		index               ='central.mvn'
+		
+-noimportjava: true
+javac.source: 17
+javac.target: 17

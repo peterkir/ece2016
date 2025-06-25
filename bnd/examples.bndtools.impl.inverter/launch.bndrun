@@ -1,0 +1,26 @@
+#-runfw: org.apache.felix.framework;version=5
+#-runee: JavaSE-1.7
+
+-runprovidedcapabilities: ${native_capability}
+
+-resolve.effective: active;skip:="osgi.service"
+
+-runbundles: \
+	examples.bndtools.impl.inverter;version=snapshot,\
+	examples.bndtools.service.api;version=snapshot,\
+	org.apache.felix.gogo.command;version='[1.1.2,1.1.3)',\
+	org.apache.felix.gogo.runtime;version='[1.1.6,1.1.7)',\
+	org.apache.felix.gogo.shell;version='[1.1.4,1.1.5)',\
+	org.apache.felix.scr;version='[2.2.12,2.2.13)',\
+	org.osgi.service.component;version='[1.5.1,1.5.2)',\
+	org.osgi.util.function;version='[1.2.0,1.2.1)',\
+	org.osgi.util.promise;version='[1.3.0,1.3.1)',\
+	examples.bndtools.command;version=snapshot
+
+-runrequires: \
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.shell)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.command)',\
+	bnd.identity;id='examples.bndtools.impl.inverter',\
+	bnd.identity;id='examples.bndtools.command'
+-runfw: org.apache.felix.framework;version='[7.0.5,7.0.5]'
+-runee: JavaSE-17

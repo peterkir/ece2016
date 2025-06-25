@@ -1,0 +1,66 @@
+#
+# OSGi
+#
+org.osgi:osgi.core:8.0.0
+org.osgi:osgi.cmpn:7.0.0
+org.osgi:org.osgi.service.cm:1.6.1
+org.osgi:org.osgi.service.component:1.5.1
+org.osgi:org.osgi.service.component.annotations:1.5.1
+org.osgi:org.osgi.service.event:1.4.1
+org.osgi:org.osgi.service.http:1.2.2
+org.osgi:org.osgi.util.promise:1.3.0
+org.osgi:org.osgi.util.function:1.2.0
+org.osgi:org.osgi.annotation.versioning:1.1.2
+#
+# felix framework
+#
+org.apache.felix:org.apache.felix.configadmin:1.9.26
+org.apache.felix:org.apache.felix.metatype:1.2.4
+org.apache.felix:org.apache.felix.coordinator:1.0.2
+org.apache.felix:org.apache.felix.eventadmin:1.4.8
+org.apache.felix:org.apache.felix.fileinstall:3.5.4
+org.apache.felix:org.apache.felix.framework:7.0.5
+org.apache.felix:org.apache.felix.gogo.command:1.1.2
+org.apache.felix:org.apache.felix.gogo.runtime:1.1.6
+org.apache.felix:org.apache.felix.gogo.shell:1.1.4
+org.apache.felix:org.apache.felix.log:1.0.1
+org.apache.felix:org.apache.felix.metatype:1.1.2
+org.apache.felix:org.apache.felix.scr:2.2.12
+#
+# webconsole
+#
+org.apache.felix:org.apache.felix.webconsole:5.0.12
+	org.apache.felix:org.apache.felix.http.jetty:5.1.34
+	org.apache.felix:org.apache.felix.http.servlet-api:6.1.0
+	org.apache.felix:org.apache.felix.inventory:2.0.0
+	jakarta.servlet:jakarta.servlet-api:5.0.0
+	org.owasp.encoder:encoder:1.3.1
+	javax.servlet:javax.servlet-api:3.1.0
+	org.osgi:org.osgi.service.servlet:2.0.0
+	org.osgi:org.osgi.service.http.whiteboard:1.1.1
+	org.slf4j:slf4j-api:2.0.17
+	org.slf4j:slf4j-simple:2.0.17
+#
+# webconsole plugins
+#
+org.apache.felix:org.apache.felix.webconsole.plugins.ds:2.3.0
+org.apache.felix:org.apache.felix.webconsole.plugins.event:1.2.0
+org.apache.felix:org.apache.felix.webconsole.plugins.memoryusage:1.1.0
+org.apache.felix:org.apache.felix.webconsole.plugins.obr:1.1.0
+org.apache.felix:org.apache.felix.webconsole.plugins.packageadmin:1.1.0
+	commons-io:commons-io:2.19.0
+#
+# provides osgi.extender=osgi.serviceloader.processor
+#
+	org.apache.aries.spifly:org.apache.aries.spifly.dynamic.bundle:1.3.7
+		org.ow2.asm:asm:9.8
+		org.ow2.asm:asm-analysis:9.8
+		org.ow2.asm:asm-commons:9.8
+		org.ow2.asm:asm-tree:9.8
+		org.ow2.asm:asm-util:9.8
+#
+# testing
+#
+org.apache.servicemix.bundles:org.apache.servicemix.bundles.junit:4.13.2_1
+org.mockito:mockito-core:5.18.0
+org.objenesis:objenesis:2.6

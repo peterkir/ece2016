@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:Configuration
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    label="import bnd workspace">
+  <installation
+      name="bnd.installation"
+      label="bnd Installation">
+    <productVersion
+        href="index:/org.eclipse.setup#//@productCatalogs[name='org.eclipse.products']/@products[name='epp.package.java']/@versions[name='latest.released']"/>
+    <description>The My installation provides cool stuff.</description>
+  </installation>
+  <workspace
+      name="bnd.workspace"
+      label="bnd Workspace">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="github_org_project"
+        defaultValue="peterkir/ece2016"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="github_branch"
+        value="master"/>
+    <stream
+        href="project_bnd_workspace.setup#//@streams[name='github-repo']"/>
+    <description>The My workspace provides cool stuff.</description>
+  </workspace>
+  <description>The My configuration provides cool stuff.</description>
+</setup:Configuration>
