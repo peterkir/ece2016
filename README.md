@@ -25,7 +25,7 @@ otherwise use this to get instructions on eclipse-installer/oomph setup and conf
 
 ## Tooling
 - Java 17
-- Eclipse 2025-06
-- bndtools 6.1
+- Eclipse Platform 4.36 / Simu Release 2025-06
+- bndtools 7.1.0
 - Github Repository
 - Gitter Chat
