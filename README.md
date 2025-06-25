@@ -25,7 +25,7 @@ otherwise use this to get instructions on eclipse-installer/oomph setup and conf
 
 ## Tooling
 - Java 17
-- Eclipse 2025-03
+- Eclipse 2025-06
 - bndtools 6.1
 - Github Repository
 - Gitter Chat
