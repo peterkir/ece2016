@@ -243,7 +243,7 @@
           name="bnd">
         <predicate
             xsi:type="predicates:LocationPredicate"
-            pattern=".*/bnd/.*"/>
+            pattern=".*/bnd/.*|_bnd-root"/>
       </workingSet>
       <workingSet
           name="pde">
