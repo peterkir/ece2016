@@ -22,7 +22,7 @@ If eclipse installer/oomph is installed and URL handler is configured use this l
 - <a href="eclipse+installer:https://raw.githubusercontent.com/peterkir/ece2016/master/oomph/config.setup">oomph setup ece2016</a>
 
 otherwise use this to get instructions on eclipse-installer/oomph setup and configuration
-- [oomph setup ece2016 with installation guide](https://www.eclipse.org/setups/installer/?urlhttps://raw.githubusercontent.com/peterkir/ece2016/master/oomph/config.setup&show=true)
+- [oomph setup ece2016 with installation guide](https://www.eclipse.org/setups/installer/?url=https://raw.githubusercontent.com/peterkir/ece2016/master/oomph/config.setup&show=true)
 
 ## Tooling
 - Java 17
