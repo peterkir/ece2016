@@ -5,12 +5,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
+    xmlns:pde="http://www.eclipse.org/oomph/setup/pde/1.0"
     xmlns:predicates="http://www.eclipse.org/oomph/predicates/1.0"
     xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/JDT.ecore http://www.eclipse.org/oomph/predicates/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/SetupWorkingSets.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/pde/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/PDE.ecore http://www.eclipse.org/oomph/predicates/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/SetupWorkingSets.ecore"
     name="bnd.workspace.ece2016"
     label="bnd.workspace">
   <setupTask
@@ -267,6 +268,9 @@
         </predicate>
       </workingSet>
     </setupTask>
+    <setupTask
+        xsi:type="pde:TargetPlatformTask"
+        name="pde"/>
   </setupTask>
   <stream name="none"
       label="none"/>
