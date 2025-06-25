@@ -18,3 +18,4 @@ bin_test/
 .gradle/
 reports/
 generated/
+bnd/cnf/cache/
