@@ -1,8 +1,8 @@
 #
 # OSGi
 #
-org.osgi:osgi.cmpn:7.0.0
 org.osgi:osgi.core:8.0.0
+org.osgi:osgi.cmpn:7.0.0
 org.osgi:org.osgi.service.cm:1.6.1
 org.osgi:org.osgi.service.component:1.5.1
 org.osgi:org.osgi.service.component.annotations:1.5.1

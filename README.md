@@ -5,21 +5,6 @@ EclipseCon Europe 2016 - Tutorial - Building Nano Services with OSGi Declarative
 
 https://www.eclipsecon.org/europe2016/session/building-nano-services-osgi-declarative-services
 
-## Tooling
-- Java 8
-- Eclipse EPP committer package Oxygen M2
-- bndtools 3.3
-- Github Repository
-- Gitter Chat
-
-### full-automated setup of IDEfix Eclipse product and this Github project 
-- [IDEfix Eclipse Installation Guide](https://peterkir.github.io/idefix/bootstrap/conference/ece2016/)
-
-### oomph/eclipseInstaller product and project available
-- [oomph product.setup file](http://peterkir.github.io/oomph/public/ece2016/product-osgi.idefix.oxygen-ece2016.setup)
-- [oomph project.setup file](http://peterkir.github.io/oomph/public/ece2016/project-ece2016.setup)
-
-
 ## Tutorial content
 This tutorial is showing the usage of OSGi declarative services.
 It contains projects for Eclipse PDE (Plugin Development Environment) and as bnd/bndtools.
@@ -29,3 +14,14 @@ It contains projects for Eclipse PDE (Plugin Development Environment) and as bnd
 - configurable OSGi service implementation name <code>examples.&lt;pde|bndtools&gt;.configurable</code>
 
 It explains debugging via OSGi console, Apache Webconsole
+
+### oomph/eclipseInstaller product and project available
+- [oomph product.setup file](https://peterkir.github.io/oomph/public/ece2016/product-osgi.idefix.oxygen-ece2016.setup)
+
+
+## Tooling
+- Java 17
+- Eclipse 2025-03
+- bndtools 6.1
+- Github Repository
+- Gitter Chat
