@@ -9,7 +9,7 @@
       name="bnd.installation"
       label="bnd Installation">
     <productVersion
-        href="index:/org.eclipse.setup#//@productCatalogs[name='org.eclipse.products']/@products[name='epp.package.java']/@versions[name='2025-06']"/>
+        href="index:/org.eclipse.setup#//@productCatalogs[name='org.eclipse.products']/@products[name='epp.package.java']/@versions[name='2024-12']"/>
     <description>The My installation provides cool stuff.</description>
   </installation>
   <workspace
@@ -23,6 +23,10 @@
         xsi:type="setup:VariableTask"
         name="github_branch"
         value="master"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="installation.name"
+        value="ece2016"/>
     <stream
         href="project_bnd_workspace.setup#//@streams[name='github-repo']"/>
     <description>The My workspace provides cool stuff.</description>
