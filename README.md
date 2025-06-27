@@ -1,10 +1,8 @@
 # ece2016
 EclipseCon Europe 2016 - Tutorial - Building Nano Services with OSGi Declarative Services
 
-<div><a href="eclipse+installer:[[[https://raw.githubusercontent.com/bndtools/bndtools.p2.repo/master/setup/config_ecl-latest_bndtools-p2-repo.setup](https://raw.githubusercontent.com/peterkir/ece2016/refs/heads/master/oomph/config.setup)](https://raw.githubusercontent.com/peterkir/ece2016/refs/heads/master/oomph/config.setup)]
-       (https://raw.githubusercontent.com/peterkir/ece2016/refs/heads/master/oomph/config.setup)">
-    <img src="https://img.shields.io/static/v1?logo=eclipseide&label=eclipse%20%2B%20bndtools&message=ece2016%20on%20branch%20:%20master&style=for-the-badge&logoColor=white&labelColor=963508&color=gray"
-        alt="eclipse on ece2016 branch master" /></a>
+<div><a href="https://www.eclipse.org/setups/installer/?url=https://raw.githubusercontent.com/peterkir/ece2016/master/oomph/config.setup&show=true">
+    <img src="https://img.shields.io/static/v1?logo=eclipseide&label=eclipse%20%2B%20bndtools&message=ece2016%20on%20branch%20:%20master&style=for-the-badge&logoColor=white&labelColor=963508&color=gray" alt="eclipse on ece2016 branch master" /></a>
 </div>
 
 [![Gitter](https://badges.gitter.im/peterkir/ece2016.svg)](https://gitter.im/peterkir/ece2016?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
