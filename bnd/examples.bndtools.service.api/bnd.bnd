@@ -1,4 +1,4 @@
--buildpath: org.osgi:org.osgi.annotation.versioning
+-buildpath: org.osgi.annotation.versioning
 -baseline: *
 
 Bundle-Version: 1.0.0.${tstamp}
