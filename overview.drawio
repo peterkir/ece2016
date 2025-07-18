@@ -1,0 +1,64 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36" version="28.0.4">
+  <diagram name="Page-1" id="bQfDQUBngYj7OyqQAZcb">
+    <mxGraphModel dx="1188" dy="654" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-1" value="&amp;lt;Service API&amp;gt;&lt;br&gt;StringModifier" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="200" y="280" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-17" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;" edge="1" parent="1" source="qRXk5sM9BJdjQG_JCm5u-2" target="qRXk5sM9BJdjQG_JCm5u-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-2" value="&amp;lt;impl&amp;gt;&lt;br&gt;inverter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="110" y="390" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-3" value="&lt;a href=&quot;https://docs.osgi.org/specification/osgi.cmpn/8.0.0/service.cm.html&quot;&gt;&amp;lt;Configuration Admin Service&amp;gt;&lt;br&gt;org.apache.felix.configadmin&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="600" y="320" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-4" value="&lt;a href=&quot;https://docs.osgi.org/specification/osgi.cmpn/8.0.0/service.metatype.html&quot;&gt;&amp;lt;Metatype Service&amp;gt;&lt;br&gt;org.apache.felix.metatype&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="600" y="400" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-18" style="edgeStyle=none;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;endArrow=classic;" edge="1" parent="1" source="qRXk5sM9BJdjQG_JCm5u-5" target="qRXk5sM9BJdjQG_JCm5u-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-5" value="&amp;lt;impl&amp;gt;&lt;br&gt;configurable" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="270" y="390" width="270" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-6" value="@Interface&lt;br&gt;StringManipulatorConfig" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Lucida Console;fontSize=12;fontColor=default;fillColor=default;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="305" y="500" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-7" value="&lt;a href=&quot;https://docs.osgi.org/specification/osgi.core/8.0.0/&quot;&gt;&amp;lt;OSGi core&amp;gt;&lt;br&gt;org.apache.felix.framework&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="600" y="240" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-8" value="&lt;a href=&quot;https://devdocs.io/openjdk~17/&quot;&gt;&amp;lt;JavaRuntimeEnvironment&amp;gt;&lt;br&gt;OpenJDK 17&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="600" y="160" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-19" value="" style="edgeStyle=none;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;endArrow=classic;" edge="1" parent="1" source="qRXk5sM9BJdjQG_JCm5u-9" target="qRXk5sM9BJdjQG_JCm5u-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-9" value="&amp;lt;gogo&amp;gt;&lt;br&gt;StringCommand" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="125" y="120" width="270" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-10" value="&amp;lt;Component&amp;gt;&lt;br&gt;StringManipulator" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Lucida Console;fontSize=12;fontColor=default;fillColor=default;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="305" y="450" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-11" value="&lt;a href=&quot;https://docs.osgi.org/specification/osgi.cmpn/8.0.0/service.http.html&quot;&gt;&amp;lt;Http Service Specification&amp;gt;&lt;br&gt;org.apach.felix.http.servlet-api&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="600" y="480" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-12" value="API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="600" y="660" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-13" value="Implementation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="760" y="600" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-15" value="Spec" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="600" y="600" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-16" value="Consumer" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="760" y="660" width="120" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

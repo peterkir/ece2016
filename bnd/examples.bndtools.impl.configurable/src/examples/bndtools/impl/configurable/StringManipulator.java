@@ -20,7 +20,7 @@ import examples.service.api.StringModifier;
 	boolean uppercase() default false;
 }
 
-@Component(configurationPid = "manipulator", configurationPolicy = ConfigurationPolicy.REQUIRE)
+@Component(configurationPid = "manipulator", configurationPolicy = ConfigurationPolicy.OPTIONAL)
 @Designate(ocd = StringManipulatorConfig.class)
 public class StringManipulator implements StringModifier {
 

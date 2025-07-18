@@ -15,7 +15,7 @@ public class StringInverterImpl implements StringModifier {
 
 	@Activate
 	void activate() {
-		System.out.println(this.getClass() + " activated");
+		System.out.println("modifications " + this.getClass() + " activated");
 	}
 
 	@Deactivate

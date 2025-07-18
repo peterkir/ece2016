@@ -29,28 +29,37 @@ public class ProcessCommand {
         manager.listUserProcesses().forEach(ph ->
             System.out.printf("PID: %d, CMD: %s%n", ph.pid(), ph.info().command().orElse("<unknown>")));
     }
+    // Cache parent PIDs for faster lookup in listDetail
+    private Map<Long, Long> getParentPidMap(List<ProcessHandle> processes) {
+        return processes.stream()
+            .collect(Collectors.toMap(
+                ProcessHandle::pid,
+                ph -> ph.parent().map(ProcessHandle::pid).orElse(-1L)
+            ));
+    }
 
     public void listDetail() {
         List<ProcessHandle> userProcesses = manager.listUserProcesses();
-        
+
+        // Build a map of PID -> parent PID for fast lookup
+        Map<Long, Long> parentPidMap = getParentPidMap(userProcesses);
+
         // Group processes by parent PID
         Map<Long, List<ProcessHandle>> processByParent = userProcesses.stream()
-            .collect(Collectors.groupingBy(ph -> 
-                ph.parent().map(ProcessHandle::pid).orElse(-1L)));
-        
-        // Find root processes (those without parents in our user process list)
+            .collect(Collectors.groupingBy(ph -> parentPidMap.get(ph.pid())));
+
+        // Find root processes (those whose parent PID is not in our process list)
         List<ProcessHandle> rootProcesses = userProcesses.stream()
-            .filter(ph -> ph.parent().isEmpty() || 
-                !userProcesses.contains(ph.parent().get()))
+            .filter(ph -> !parentPidMap.containsKey(parentPidMap.get(ph.pid())) || parentPidMap.get(ph.pid()) == -1L)
             .sorted((p1, p2) -> Long.compare(p1.pid(), p2.pid()))
             .collect(Collectors.toList());
-        
+
         // Display process tree
         for (ProcessHandle root : rootProcesses) {
             displayProcessTree(root, processByParent, 0);
         }
     }
-    
+
     private void displayProcessTree(ProcessHandle process, Map<Long, List<ProcessHandle>> processByParent, int indentLevel) {
         // Print current process with appropriate indentation
         String indent = "    ".repeat(indentLevel);
