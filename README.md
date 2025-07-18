@@ -6,8 +6,7 @@ EclipseCon Europe 2016 - Tutorial - Building Nano Services with OSGi Declarative
 </div>
 
 [![Gitter](https://badges.gitter.im/peterkir/ece2016.svg)](https://gitter.im/peterkir/ece2016?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-https://www.eclipsecon.org/europe2016/session/building-nano-services-osgi-declarative-services
+[Slides - Building Nano Services with OSGi](https://peterkir.github.io/ece2016/slides/Building_Nano_Services_with_OSGi_Declarative_Services.pdf)
 
 ## Tutorial content
 This tutorial is showing the usage of OSGi declarative services.
