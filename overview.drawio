@@ -10,29 +10,17 @@
         <mxCell id="qRXk5sM9BJdjQG_JCm5u-17" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Helvetica;fontSize=12;fontColor=default;" edge="1" parent="1" source="qRXk5sM9BJdjQG_JCm5u-2" target="qRXk5sM9BJdjQG_JCm5u-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="qRXk5sM9BJdjQG_JCm5u-2" value="&amp;lt;impl&amp;gt;&lt;br&gt;inverter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="110" y="390" width="120" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="qRXk5sM9BJdjQG_JCm5u-3" value="&lt;a href=&quot;https://docs.osgi.org/specification/osgi.cmpn/8.0.0/service.cm.html&quot;&gt;&amp;lt;Configuration Admin Service&amp;gt;&lt;br&gt;org.apache.felix.configadmin&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="600" y="320" width="260" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="qRXk5sM9BJdjQG_JCm5u-4" value="&lt;a href=&quot;https://docs.osgi.org/specification/osgi.cmpn/8.0.0/service.metatype.html&quot;&gt;&amp;lt;Metatype Service&amp;gt;&lt;br&gt;org.apache.felix.metatype&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="600" y="400" width="260" height="40" as="geometry" />
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-2" value="&amp;lt;impl&amp;gt;&lt;br&gt;inverter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;align=center;fontFamily=Helvetica;fontSize=12;fontColor=default;" vertex="1" parent="1">
+          <mxGeometry x="20" y="400" width="230" height="150" as="geometry" />
         </mxCell>
         <mxCell id="qRXk5sM9BJdjQG_JCm5u-18" style="edgeStyle=none;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;endArrow=classic;" edge="1" parent="1" source="qRXk5sM9BJdjQG_JCm5u-5" target="qRXk5sM9BJdjQG_JCm5u-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qRXk5sM9BJdjQG_JCm5u-5" value="&amp;lt;impl&amp;gt;&lt;br&gt;configurable" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="270" y="390" width="270" height="200" as="geometry" />
+          <mxGeometry x="270" y="400" width="230" height="150" as="geometry" />
         </mxCell>
         <mxCell id="qRXk5sM9BJdjQG_JCm5u-6" value="@Interface&lt;br&gt;StringManipulatorConfig" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Lucida Console;fontSize=12;fontColor=default;fillColor=default;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="305" y="500" width="200" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="qRXk5sM9BJdjQG_JCm5u-7" value="&lt;a href=&quot;https://docs.osgi.org/specification/osgi.core/8.0.0/&quot;&gt;&amp;lt;OSGi core&amp;gt;&lt;br&gt;org.apache.felix.framework&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="600" y="240" width="260" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="qRXk5sM9BJdjQG_JCm5u-8" value="&lt;a href=&quot;https://devdocs.io/openjdk~17/&quot;&gt;&amp;lt;JavaRuntimeEnvironment&amp;gt;&lt;br&gt;OpenJDK 17&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="600" y="160" width="260" height="40" as="geometry" />
+          <mxGeometry x="285" y="490" width="200" height="40" as="geometry" />
         </mxCell>
         <mxCell id="qRXk5sM9BJdjQG_JCm5u-19" value="" style="edgeStyle=none;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;labelBackgroundColor=default;endArrow=classic;" edge="1" parent="1" source="qRXk5sM9BJdjQG_JCm5u-9" target="qRXk5sM9BJdjQG_JCm5u-1">
           <mxGeometry relative="1" as="geometry" />
@@ -41,22 +29,50 @@
           <mxGeometry x="125" y="120" width="270" height="80" as="geometry" />
         </mxCell>
         <mxCell id="qRXk5sM9BJdjQG_JCm5u-10" value="&amp;lt;Component&amp;gt;&lt;br&gt;StringManipulator" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Lucida Console;fontSize=12;fontColor=default;fillColor=default;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="305" y="450" width="200" height="40" as="geometry" />
+          <mxGeometry x="285" y="440" width="200" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="qRXk5sM9BJdjQG_JCm5u-11" value="&lt;a href=&quot;https://docs.osgi.org/specification/osgi.cmpn/8.0.0/service.http.html&quot;&gt;&amp;lt;Http Service Specification&amp;gt;&lt;br&gt;org.apach.felix.http.servlet-api&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="600" y="480" width="260" height="80" as="geometry" />
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-21" value="Legend" style="swimlane;whiteSpace=wrap;html=1;rounded=1;strokeColor=#996185;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=#e6d0de;gradientColor=#d5739d;" vertex="1" parent="1">
+          <mxGeometry x="780" y="530" width="231" height="160" as="geometry">
+            <mxRectangle x="519" y="530" width="80" height="30" as="alternateBounds" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="qRXk5sM9BJdjQG_JCm5u-12" value="API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="600" y="660" width="120" height="40" as="geometry" />
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-12" value="API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="qRXk5sM9BJdjQG_JCm5u-21">
+          <mxGeometry x="10" y="100" width="100" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="qRXk5sM9BJdjQG_JCm5u-13" value="Implementation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="760" y="600" width="120" height="40" as="geometry" />
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-13" value="Implementation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="qRXk5sM9BJdjQG_JCm5u-21">
+          <mxGeometry x="121" y="40" width="100" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="qRXk5sM9BJdjQG_JCm5u-15" value="Spec" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="600" y="600" width="120" height="40" as="geometry" />
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-15" value="Spec" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="qRXk5sM9BJdjQG_JCm5u-21">
+          <mxGeometry x="10" y="40" width="100" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="qRXk5sM9BJdjQG_JCm5u-16" value="Consumer" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="760" y="660" width="120" height="40" as="geometry" />
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-16" value="Consumer" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="qRXk5sM9BJdjQG_JCm5u-21">
+          <mxGeometry x="121" y="100" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-22" value="&amp;lt;Component&amp;gt;&lt;br&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; font-weight: 400; text-align: start; text-wrap-mode: nowrap;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22%26amp%3Blt%3BComponent%26amp%3Bgt%3B%26lt%3Bbr%26gt%3BStringManipulator%22%20style%3D%22rounded%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3BstrokeColor%3Ddefault%3Balign%3Dcenter%3BverticalAlign%3Dmiddle%3BfontFamily%3DLucida%20Console%3BfontSize%3D12%3BfontColor%3Ddefault%3BfillColor%3Ddefault%3BfontStyle%3D1%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22305%22%20y%3D%22450%22%20width%3D%22200%22%20height%3D%2240%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;span style=&quot;padding: 0px 0px 0px 2px;&quot;&gt;&lt;span style=&quot;font-family: Consolas; font-size: 10pt; white-space: pre;&quot;&gt;&lt;span style=&quot;&quot;&gt;StringInverterImpl&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Lucida Console;fontSize=12;fontColor=default;fillColor=default;fontStyle=1;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="35" y="440" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-23" value="Specifications" style="swimlane;whiteSpace=wrap;html=1;rounded=1;strokeColor=#0e8088;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;labelBackgroundColor=none;fillColor=#b0e3e6;" vertex="1" parent="1">
+          <mxGeometry x="780" y="80" width="261" height="440" as="geometry">
+            <mxRectangle x="519" y="80" width="110" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-3" value="&lt;a href=&quot;https://docs.osgi.org/specification/osgi.cmpn/8.0.0/service.cm.html&quot;&gt;&amp;lt;Configuration Admin Service&amp;gt;&lt;br&gt;org.apache.felix.configadmin&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="qRXk5sM9BJdjQG_JCm5u-23">
+          <mxGeometry x="20" y="220" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-4" value="&lt;a href=&quot;https://docs.osgi.org/specification/osgi.cmpn/8.0.0/service.metatype.html&quot;&gt;&amp;lt;Metatype Service&amp;gt;&lt;br&gt;org.apache.felix.metatype&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="qRXk5sM9BJdjQG_JCm5u-23">
+          <mxGeometry x="20" y="280" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-7" value="&lt;a href=&quot;https://docs.osgi.org/specification/osgi.core/8.0.0/&quot;&gt;&amp;lt;OSGi core&amp;gt;&lt;br&gt;org.apache.felix.framework&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="qRXk5sM9BJdjQG_JCm5u-23">
+          <mxGeometry x="20" y="100" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-8" value="&lt;a href=&quot;https://devdocs.io/openjdk~17/&quot;&gt;&amp;lt;JavaRuntimeEnvironment&amp;gt;&lt;br&gt;OpenJDK 17&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="qRXk5sM9BJdjQG_JCm5u-23">
+          <mxGeometry x="20" y="40" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-11" value="&lt;a href=&quot;https://docs.osgi.org/specification/osgi.cmpn/8.0.0/service.http.html&quot;&gt;&amp;lt;Http Service Specification&amp;gt;&lt;br&gt;org.apach.felix.http.servlet-api&lt;/a&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top;" vertex="1" parent="qRXk5sM9BJdjQG_JCm5u-23">
+          <mxGeometry x="20" y="340" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qRXk5sM9BJdjQG_JCm5u-20" value="&lt;a href=&quot;https://docs.osgi.org/specification/osgi.cmpn/8.0.0/service.component.html&quot;&gt;&amp;lt;Declarative Service&amp;gt;&lt;br&gt;org.apache.felix.s&lt;/a&gt;cr" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="qRXk5sM9BJdjQG_JCm5u-23">
+          <mxGeometry x="20" y="160" width="220" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
